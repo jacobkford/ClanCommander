@@ -14,7 +14,13 @@ public class InteractionHandler : DiscordClientService
     private readonly IHostEnvironment _environment;
     private readonly IConfiguration _configuration;
 
-    public InteractionHandler(DiscordSocketClient client, ILogger<DiscordClientService> logger, IServiceProvider provider, InteractionService interactionService, IHostEnvironment environment, IConfiguration configuration) : base(client, logger)
+    public InteractionHandler(
+        DiscordSocketClient client,
+        ILogger<DiscordClientService> logger,
+        IServiceProvider provider,
+        InteractionService interactionService,
+        IHostEnvironment environment,
+        IConfiguration configuration) : base(client, logger)
     {
         _provider = provider;
         _interactionService = interactionService;

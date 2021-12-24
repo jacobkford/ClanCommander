@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Infrastructure", "ClanCommander.Infrastructure\ClanCommander.Infrastructure.csproj", "{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Infrastructure", "src\ClanCommander.Infrastructure\ClanCommander.Infrastructure.csproj", "{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Application", "ClanCommander.Application\ClanCommander.Application.csproj", "{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Application", "src\ClanCommander.Application\ClanCommander.Application.csproj", "{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.DiscordBot", "ClanCommander.DiscordBot\ClanCommander.DiscordBot.csproj", "{508A7751-83D3-451E-995C-30718B7B7081}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.DiscordBot", "src\ClanCommander.DiscordBot\ClanCommander.DiscordBot.csproj", "{508A7751-83D3-451E-995C-30718B7B7081}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Domain", "ClanCommander.Domain\ClanCommander.Domain.csproj", "{8EDD198B-9400-487F-9D4C-6280B00DF6B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Domain", "src\ClanCommander.Domain\ClanCommander.Domain.csproj", "{8EDD198B-9400-487F-9D4C-6280B00DF6B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

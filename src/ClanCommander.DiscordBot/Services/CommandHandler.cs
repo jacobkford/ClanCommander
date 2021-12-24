@@ -28,7 +28,7 @@ public class CommandHandler : DiscordClientService
     {
         Client.MessageReceived += HandleMessage;
         _commandService.CommandExecuted += CommandExecutedAsync;
-        await _commandService.AddModulesAsync(Assembly.GetEntryAssembly(), _provider);
+        await _commandService.AddModulesAsync(Assembly.Load("ClanCommander.Application"), _provider);
     }
     private async Task HandleMessage(SocketMessage incomingMessage)
     {
