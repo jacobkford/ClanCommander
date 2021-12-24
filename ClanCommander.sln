@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.DiscordBot", "ClanCommander.DiscordBot\ClanCommander.DiscordBot.csproj", "{508A7751-83D3-451E-995C-30718B7B7081}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.Domain", "ClanCommander.Domain\ClanCommander.Domain.csproj", "{8EDD198B-9400-487F-9D4C-6280B00DF6B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{508A7751-83D3-451E-995C-30718B7B7081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
