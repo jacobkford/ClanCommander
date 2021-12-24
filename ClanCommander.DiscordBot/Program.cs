@@ -2,9 +2,9 @@ using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using ClanCommander.DiscordBot;
 using Serilog;
 using Serilog.Events;
+using ClanCommander.DiscordBot.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -17,7 +17,6 @@ try
     Log.Information("Starting host");
 
     var host = Host.CreateDefaultBuilder(args)
-        // Serilog.Extensions.Hosting is required.
         .UseSerilog()
         .ConfigureDiscordHost((context, config) =>
         {
@@ -45,9 +44,9 @@ try
         })
         .ConfigureServices((context, services) =>
         {
-            /*services.AddHostedService<CommandHandler>();
-            services.AddHostedService<InteractionHandler>();
-            services.AddHostedService<BotStatusService>();*/
+            services.AddHostedService<CommandHandler>();
+            // services.AddHostedService<InteractionHandler>();
+            services.AddHostedService<ReadyService>();
         }).Build();
 
     await host.RunAsync();
