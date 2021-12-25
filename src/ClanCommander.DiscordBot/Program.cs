@@ -6,6 +6,7 @@ using Serilog;
 using Serilog.Events;
 using ClanCommander.DiscordBot.Services;
 using Fergun.Interactive;
+using ClanCommander.Infrastructure;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
@@ -49,6 +50,7 @@ try
             services.AddHostedService<InteractionHandler>();
             services.AddHostedService<ReadyService>();
             services.AddSingleton<InteractiveService>();
+            services.AddInfrastructure(context.Configuration);
         }).Build();
 
     await host.RunAsync();

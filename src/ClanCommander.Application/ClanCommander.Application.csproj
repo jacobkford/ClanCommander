@@ -10,7 +10,6 @@
     <Folder Include="Entry\" />
     <Folder Include="Moderation\" />
     <Folder Include="CWL\" />
-    <Folder Include="Debug\" />
     <Folder Include="Roles\" />
     <Folder Include="Social\" />
   </ItemGroup>
