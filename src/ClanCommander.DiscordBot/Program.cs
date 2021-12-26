@@ -50,7 +50,7 @@ try
             services.AddHostedService<InteractionHandler>();
             services.AddHostedService<ReadyService>();
             services.AddSingleton<InteractiveService>();
-            services.AddInfrastructure(context.Configuration);
+            services.AddApplicationCore(context.Configuration);
         }).Build();
 
     await host.RunAsync();

@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.Infrastructure", "src\ClanCommander.Infrastructure\ClanCommander.Infrastructure.csproj", "{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.ApplicationCore", "src\ClanCommander.ApplicationCore\ClanCommander.ApplicationCore.csproj", "{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.DiscordBot", "src\ClanCommander.DiscordBot\ClanCommander.DiscordBot.csproj", "{508A7751-83D3-451E-995C-30718B7B7081}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.Domain", "src\ClanCommander.Domain\ClanCommander.Domain.csproj", "{8EDD198B-9400-487F-9D4C-6280B00DF6B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0A2F56C-8C58-44A6-BA33-C4276CC9796B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B656C3BB-B566-4D42-87FD-6FEDFD9BF349}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,10 +21,6 @@ Global
 		{508A7751-83D3-451E-995C-30718B7B7081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8EDD198B-9400-487F-9D4C-6280B00DF6B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
