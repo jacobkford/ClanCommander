@@ -1,9 +1,9 @@
 ﻿using ClashOfClans;
 using ClashOfClans.Models;
 
-namespace ClanCommander.Infrastructure.Services;
+namespace ClanCommander.ApplicationCore.Services;
 
-public class ClashOfClansService
+public class ClashOfClansService : IClashOfClansService
 {
     // This includes the '#' (example => #FG3)
     private readonly int TagMinimumLength = 4;

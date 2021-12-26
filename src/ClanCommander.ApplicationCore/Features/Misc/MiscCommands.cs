@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 
-namespace ClanCommander.Application.Misc;
+namespace ClanCommander.ApplicationCore.Features.Misc;
+
 public class MiscCommands : ModuleBase<SocketCommandContext>
 {
     [Command("ping")]

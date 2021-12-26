@@ -3,9 +3,9 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 
-namespace ClanCommander.Infrastructure.Services;
+namespace ClanCommander.ApplicationCore.Services;
 
-public class MailService
+public class MailService : IMailService
 {
     private GmailService GmailService { get; set; }
 

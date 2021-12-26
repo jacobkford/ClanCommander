@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClanCommander.Application\ClanCommander.Application.csproj" />
+    <ProjectReference Include="..\ClanCommander.Application\ClanCommander.ApplicationCore.csproj" />
     <ProjectReference Include="..\ClanCommander.Infrastructure\ClanCommander.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

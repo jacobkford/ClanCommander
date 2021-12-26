@@ -6,7 +6,7 @@ using Serilog;
 using Serilog.Events;
 using ClanCommander.DiscordBot.Services;
 using Fergun.Interactive;
-using ClanCommander.Infrastructure;
+using ClanCommander.ApplicationCore;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
