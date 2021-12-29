@@ -1,11 +1,4 @@
-﻿using System.Reflection;
-using Discord;
-using Discord.Addons.Hosting;
-using Discord.Addons.Hosting.Util;
-using Discord.Interactions;
-using Discord.WebSocket;
-
-namespace ClanCommander.DiscordBot.Services;
+﻿namespace ClanCommander.DiscordBot.Services;
 
 public class InteractionHandler : DiscordClientService
 {
@@ -48,7 +41,7 @@ public class InteractionHandler : DiscordClientService
             await _interactionService.RegisterCommandsGloballyAsync();
     }
 
-    private Task ComponentCommandExecuted(ComponentCommandInfo arg1, Discord.IInteractionContext arg2, IResult arg3)
+    private Task ComponentCommandExecuted(ComponentCommandInfo arg1, IInteractionContext arg2, IInteractionResult arg3)
     {
         if (!arg3.IsSuccess)
         {
@@ -77,7 +70,7 @@ public class InteractionHandler : DiscordClientService
         return Task.CompletedTask;
     }
 
-    private Task ContextCommandExecuted(ContextCommandInfo arg1, Discord.IInteractionContext arg2, IResult arg3)
+    private Task ContextCommandExecuted(ContextCommandInfo arg1, IInteractionContext arg2, IInteractionResult arg3)
     {
         if (!arg3.IsSuccess)
         {
@@ -106,7 +99,7 @@ public class InteractionHandler : DiscordClientService
         return Task.CompletedTask;
     }
 
-    private Task SlashCommandExecuted(SlashCommandInfo arg1, Discord.IInteractionContext arg2, IResult arg3)
+    private Task SlashCommandExecuted(SlashCommandInfo arg1, IInteractionContext arg2, IInteractionResult arg3)
     {
         if (!arg3.IsSuccess)
         {

@@ -1,13 +1,3 @@
-using Discord;
-using Discord.Addons.Hosting;
-using Discord.Commands;
-using Discord.WebSocket;
-using Serilog;
-using Serilog.Events;
-using ClanCommander.DiscordBot.Services;
-using Fergun.Interactive;
-using ClanCommander.ApplicationCore;
-
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
@@ -37,7 +27,7 @@ try
         .UseCommandService((context, config) =>
         {
             config.LogLevel = LogSeverity.Info;
-            config.DefaultRunMode = RunMode.Async;
+            config.DefaultRunMode = Discord.Commands.RunMode.Async;
         })
         .UseInteractionService((context, config) =>
         {

@@ -1,9 +1,4 @@
-﻿using Discord;
-using Discord.Addons.Hosting;
-using Discord.Addons.Hosting.Util;
-using Discord.WebSocket;
-
-namespace ClanCommander.DiscordBot.Services;
+﻿namespace ClanCommander.DiscordBot.Services;
 
 public class ReadyService : DiscordClientService
 {

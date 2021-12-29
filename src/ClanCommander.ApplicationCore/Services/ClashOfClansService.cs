@@ -1,7 +1,4 @@
-﻿using ClashOfClans;
-using ClashOfClans.Models;
-
-namespace ClanCommander.ApplicationCore.Services;
+﻿namespace ClanCommander.ApplicationCore.Services;
 
 public class ClashOfClansService : IClashOfClansService
 {
@@ -20,7 +17,7 @@ public class ClashOfClansService : IClashOfClansService
 
     public async Task<Player?> FindPlayer(string id)
     {
-        var playerTag = String.Concat(id.Where(c => !Char.IsWhiteSpace(c))).ToUpper();
+        var playerTag = string.Concat(id.Where(c => !char.IsWhiteSpace(c))).ToUpper();
 
         if (!playerTag.StartsWith('#')
             || playerTag.Length < TagMinimumLength

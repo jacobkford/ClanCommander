@@ -1,7 +1,4 @@
-﻿using Discord;
-using Discord.WebSocket;
-
-namespace ClanCommander.ApplicationCore.Extensions;
+﻿namespace ClanCommander.ApplicationCore.Extensions;
 
 public static class DiscordEmbedExtensions
 {

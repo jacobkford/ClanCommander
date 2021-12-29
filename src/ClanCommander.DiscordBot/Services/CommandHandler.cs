@@ -1,10 +1,4 @@
-﻿using Discord;
-using Discord.Addons.Hosting;
-using Discord.Commands;
-using Discord.WebSocket;
-using System.Reflection;
-
-namespace ClanCommander.DiscordBot.Services;
+﻿namespace ClanCommander.DiscordBot.Services;
 
 public class CommandHandler : DiscordClientService
 {
@@ -47,7 +41,7 @@ public class CommandHandler : DiscordClientService
         await _commandService.ExecuteAsync(context, argPos, _provider);
     }
 
-    private async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)
+    private async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, ICommandResult result)
     {
         Logger.LogInformation("User {user} attempted to use command {command}", context.User, command.Value.Name);
 

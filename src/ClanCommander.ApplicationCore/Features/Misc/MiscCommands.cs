@@ -1,6 +1,4 @@
-﻿using Discord.Commands;
-
-namespace ClanCommander.ApplicationCore.Features.Misc;
+﻿namespace ClanCommander.ApplicationCore.Features.Misc;
 
 public class MiscCommands : ModuleBase<SocketCommandContext>
 {
