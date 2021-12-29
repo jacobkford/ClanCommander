@@ -2,11 +2,11 @@
 
 internal class ClanMember : Entity
 {
-    public string Id { get; set; }
+    public string Id { get; private set; }
 
-    public ulong UserId { get; set; }
+    public ulong UserId { get; private set; }
 
-    public bool CWLParticipant { get; set; }
+    public bool CWLParticipant { get; private set; }
 
     public ClanMember(string id, ulong userId)
     {
