@@ -1,6 +1,4 @@
-﻿using ClashOfClans.Models;
-
-namespace ClanCommander.ApplicationCore.Services;
+﻿namespace ClanCommander.ApplicationCore.Interfaces;
 
 public interface IClashOfClansService
 {

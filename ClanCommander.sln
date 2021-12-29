@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.ApplicationCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.DiscordBot", "src\ClanCommander.DiscordBot\ClanCommander.DiscordBot.csproj", "{508A7751-83D3-451E-995C-30718B7B7081}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClanCommander.SharedKernel", "src\ClanCommander.SharedKernel\ClanCommander.SharedKernel.csproj", "{A17D0028-0A5B-4F5E-AB87-D57F70CB13CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClanCommander.UnitTests", "tests\ClanCommander.UnitTests\ClanCommander.UnitTests.csproj", "{FBED6596-4DC4-444E-A264-2228C9EF1AB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{508A7751-83D3-451E-995C-30718B7B7081}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508A7751-83D3-451E-995C-30718B7B7081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17D0028-0A5B-4F5E-AB87-D57F70CB13CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17D0028-0A5B-4F5E-AB87-D57F70CB13CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17D0028-0A5B-4F5E-AB87-D57F70CB13CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17D0028-0A5B-4F5E-AB87-D57F70CB13CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBED6596-4DC4-444E-A264-2228C9EF1AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBED6596-4DC4-444E-A264-2228C9EF1AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBED6596-4DC4-444E-A264-2228C9EF1AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBED6596-4DC4-444E-A264-2228C9EF1AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
