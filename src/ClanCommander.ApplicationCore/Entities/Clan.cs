@@ -15,7 +15,7 @@ internal class Clan : Entity, IAggregateRoot
 
     public Clan(string id, string name, ulong discordServerId)
     {
-        Id = Guard.Against.NullOrWhiteSpace(id, nameof(id));
+        Id = Guard.Against.InvalidClashOfClansTag(id, nameof(id));
         Name = Guard.Against.NullOrWhiteSpace(name, nameof(name));
         DiscordServerId = Guard.Against.InvalidDiscordSnowflakeId(discordServerId, nameof(discordServerId));
     }

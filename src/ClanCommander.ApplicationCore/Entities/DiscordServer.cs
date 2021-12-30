@@ -20,12 +20,12 @@ internal class DiscordServer : Entity, IAggregateRoot
         MessageCommandsEnabled = false;
     }
 
-    public Clan CreateServerClan(string id, string name)
+    public Clan CreateServerClan(string clanId, string clanName)
     {
-        Guard.Against.NullOrWhiteSpace(id, nameof(id));
-        Guard.Against.NullOrWhiteSpace(name, nameof(name));
+        Guard.Against.InvalidClashOfClansTag(clanId, nameof(clanId));
+        Guard.Against.NullOrWhiteSpace(clanName, nameof(clanName));
 
-        return new Clan(id, name, Id);
+        return new Clan(clanId, clanName, Id);
     }
 
     public void UpdatePrefix(string prefix)

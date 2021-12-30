@@ -10,7 +10,7 @@ internal class ClanMember : Entity
 
     public ClanMember(string id, ulong userId)
     {
-        Id = Guard.Against.NullOrWhiteSpace(id, nameof(id));
+        Id = Guard.Against.InvalidClashOfClansTag(id, nameof(id));
         UserId = Guard.Against.InvalidDiscordSnowflakeId(userId, nameof(userId));
         CWLParticipant = false;
     }

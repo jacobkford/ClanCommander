@@ -13,4 +13,15 @@ public static class GuardClauseExtensions
 
         return input;
     }
+
+    public static string InvalidClashOfClansTag(this IGuardClause guardClause, string input, string parameterName, string? message = null)
+    {
+        Guard.Against.NullOrWhiteSpace(input, parameterName, message);
+
+        if (!Regex.Match(input, RegexConstants.ClashOfClansTag).Success)
+        {
+            throw new ArgumentException(message ?? "Invalid tag", parameterName);
+        }
+        return input;
+    }
 }
