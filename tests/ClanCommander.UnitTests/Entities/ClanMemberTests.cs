@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.UnitTests;
+﻿namespace ClanCommander.UnitTests.Entities;
 
 public class ClanMemberTests
 {

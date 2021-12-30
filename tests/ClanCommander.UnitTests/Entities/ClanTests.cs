@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.UnitTests;
+﻿namespace ClanCommander.UnitTests.Entities;
 
 public class ClanTests
 {
@@ -11,7 +11,7 @@ public class ClanTests
     {
         _clan = new Clan(_clanId, _clanName, _discordServerId);
     }
-    
+
 
     [Fact]
     public void Constructor_ShouldCreateClan_WhenAllParametersAreValid()
@@ -52,7 +52,7 @@ public class ClanTests
 
         // Assert
         _clan.Members.Should().NotBeEmpty()
-            .And.ContainSingle(clanMember => 
+            .And.ContainSingle(clanMember =>
                 clanMember.Id == memberId && clanMember.UserId == userId);
     }
 
@@ -74,6 +74,7 @@ public class ClanTests
         new List<object[]>
         {
             new object[] { "", "PlaneClashers", 760910445686161488u },
+            new object[] { "test", "PlaneClashers", 760910445686161488u },
             new object[] { "#9UGQ0GL", "", 760910445686161488u },
             new object[] { "#9UGQ0GL", "PlaneClashers", (ulong)1 }
         };

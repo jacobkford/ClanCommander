@@ -1,4 +1,4 @@
-namespace ClanCommander.UnitTests;
+namespace ClanCommander.UnitTests.Entities;
 
 public class DiscordServerTests
 {
@@ -119,7 +119,7 @@ public class DiscordServerTests
         _discordServer.MessageCommandsEnabled.Should().BeFalse();
     }
 
-    public static IEnumerable<object[]> InvalidConstructorParameters => 
+    public static IEnumerable<object[]> InvalidConstructorParameters =>
         new List<object[]>
         {
             new object[] { (ulong)1, "Test Server" },
