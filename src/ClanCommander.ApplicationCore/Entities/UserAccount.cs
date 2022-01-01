@@ -1,6 +1,6 @@
 ﻿namespace ClanCommander.ApplicationCore.Entities;
 
-public class UserAccount : Entity
+internal class UserAccount : Entity
 {
     public string Id { get; private set; }
 

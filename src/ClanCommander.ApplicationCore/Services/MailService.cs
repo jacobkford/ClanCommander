@@ -1,6 +1,6 @@
 ﻿namespace ClanCommander.ApplicationCore.Services;
 
-public class MailService : IMailService
+internal class MailService : IMailService
 {
     private GmailService GmailService { get; set; }
 

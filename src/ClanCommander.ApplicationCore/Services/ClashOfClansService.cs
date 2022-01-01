@@ -1,6 +1,6 @@
 ﻿namespace ClanCommander.ApplicationCore.Services;
 
-public class ClashOfClansService : IClashOfClansService
+internal class ClashOfClansService : IClashOfClansService
 {
     // This includes the '#' (example => #FG3)
     private readonly int TagMinimumLength = 4;

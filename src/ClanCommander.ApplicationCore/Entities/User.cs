@@ -1,6 +1,6 @@
 ﻿namespace ClanCommander.ApplicationCore.Entities;
 
-public class User : Entity, IAggregateRoot
+internal class User : Entity, IAggregateRoot
 {
     public ulong Id { get; private set; }
 
