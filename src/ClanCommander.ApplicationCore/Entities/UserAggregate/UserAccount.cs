@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities;
+﻿namespace ClanCommander.ApplicationCore.Entities.UserAggregate;
 
 internal class UserAccount : Entity
 {

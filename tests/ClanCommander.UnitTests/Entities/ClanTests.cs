@@ -1,4 +1,6 @@
-﻿namespace ClanCommander.UnitTests.Entities;
+﻿using ClanCommander.ApplicationCore.Entities.ClanAggregate;
+
+namespace ClanCommander.UnitTests.Entities;
 
 public class ClanTests
 {
@@ -9,7 +11,10 @@ public class ClanTests
 
     public ClanTests()
     {
-        _clan = new Clan(_clanId, _clanName, _discordServerId);
+        _clan = new Clan(
+            ClanId.FromString(_clanId), 
+            _clanName, 
+            DiscordServerId.FromUInt64(_discordServerId));
     }
 
 
@@ -22,13 +27,16 @@ public class ClanTests
         var discordServerId = 760910445686161488u;
 
         // Act
-        var result = new Clan(clanId, clanName, discordServerId);
+        var result = new Clan(
+            ClanId.FromString(clanId), 
+            clanName, 
+            DiscordServerId.FromUInt64(discordServerId));
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().Be(clanId);
+        result.Id.Value.Should().Be(clanId);
         result.Name.Should().Be(clanName);
-        result.DiscordServerId.Should().Be(discordServerId);
+        result.DiscordServerId.Value.Should().Be(discordServerId);
         result.Members.Should().BeEmpty();
     }
 
@@ -36,8 +44,11 @@ public class ClanTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(string clanId, string clanName, ulong discordServerId)
     {
-        Invoking(() => new Clan(clanId, clanName, discordServerId))
-            .Should().Throw<SystemException>();
+        Invoking(() => new Clan(
+            ClanId.FromString(clanId), 
+            clanName,
+            DiscordServerId.FromUInt64(discordServerId)))
+                .Should().Throw<SystemException>();
     }
 
     [Fact]
@@ -45,7 +56,7 @@ public class ClanTests
     {
         // Arrange
         var memberId = "#PQU9QLP2V";
-        var userId = 339924145909399562u;
+        var userId = UserId.FromUInt64(339924145909399562u);
 
         // Act
         _clan.AddClanMember(memberId, userId);
@@ -61,7 +72,7 @@ public class ClanTests
     {
         // Arrange
         var memberId = "#PQU9QLP2V";
-        var userId = 339924145909399562u;
+        var userId = UserId.FromUInt64(339924145909399562u);
         _clan.AddClanMember(memberId, userId);
 
         // Act

@@ -1,8 +1,8 @@
-﻿namespace ClanCommander.ApplicationCore.Entities;
+﻿namespace ClanCommander.ApplicationCore.Entities.DiscordServerAggregate;
 
 internal class DiscordServer : Entity, IAggregateRoot
 {
-    public ulong Id { get; private set; }
+    public DiscordServerId Id { get; private set; }
 
     public string Name { get; private set; }
 
@@ -12,20 +12,20 @@ internal class DiscordServer : Entity, IAggregateRoot
 
     private DiscordServer() { }
 
-    public DiscordServer(ulong id, string name)
+    public DiscordServer(DiscordServerId id, string name)
     {
-        Id = Guard.Against.InvalidDiscordSnowflakeId(id, nameof(id));
-        Name = Guard.Against.NullOrWhiteSpace(name, nameof(name));
+        Guard.Against.InvalidDiscordSnowflakeId(id.Value, nameof(id));
+        Guard.Against.NullOrWhiteSpace(name, nameof(name));
+
+        Id = id;
+        Name = name;
         Prefix = null;
         MessageCommandsEnabled = false;
     }
 
-    public Clan CreateServerClan(string clanId, string clanName)
+    public ClanAggregate.Clan CreateServerClan(ClanId clanId, string clanName)
     {
-        Guard.Against.InvalidClashOfClansTag(clanId, nameof(clanId));
-        Guard.Against.NullOrWhiteSpace(clanName, nameof(clanName));
-
-        return new Clan(clanId, clanName, Id);
+        return new ClanAggregate.Clan(clanId, clanName, Id);
     }
 
     public void UpdatePrefix(string prefix)

@@ -1,3 +1,5 @@
+using ClanCommander.ApplicationCore.Entities.DiscordServerAggregate;
+
 namespace ClanCommander.UnitTests.Entities;
 
 public class DiscordServerTests
@@ -8,7 +10,7 @@ public class DiscordServerTests
 
     public DiscordServerTests()
     {
-        _discordServer = new DiscordServer(_serverId, _serverName);
+        _discordServer = new DiscordServer(DiscordServerId.FromUInt64(_serverId), _serverName);
     }
 
     [Fact]
@@ -19,11 +21,11 @@ public class DiscordServerTests
         var discordServerName = "Test Server";
 
         // Act
-        var result = new DiscordServer(discordServerId, discordServerName);
+        var result = new DiscordServer(DiscordServerId.FromUInt64(discordServerId), discordServerName);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().Be(discordServerId);
+        result.Id.Value.Should().Be(discordServerId);
         result.Name.Should().Be(discordServerName);
         result.Prefix.Should().BeNull();
         result.MessageCommandsEnabled.Should().BeFalse();
@@ -33,7 +35,7 @@ public class DiscordServerTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(ulong serverId, string serverName)
     {
-        Invoking(() => new DiscordServer(serverId, serverName))
+        Invoking(() => new DiscordServer(DiscordServerId.FromUInt64(serverId), serverName))
             .Should().Throw<SystemException>();
     }
 
@@ -45,20 +47,20 @@ public class DiscordServerTests
         var clanName = "PlaneClashers";
 
         // Act
-        var result = _discordServer.CreateServerClan(clanId, clanName);
+        var result = _discordServer.CreateServerClan(ClanId.FromString(clanId), clanName);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().Be(clanId);
+        result.Id.Value.Should().Be(clanId);
         result.Name.Should().Be(clanName);
-        result.DiscordServerId.Should().Be(_serverId);
+        result.DiscordServerId.Value.Should().Be(_serverId);
     }
 
     [Theory]
     [MemberData(nameof(InvalidCreateServerClanParameters))]
     public void CreateServerClan_ShouldThrowException_WhenParameterIsInvalid(string clanId, string clanName)
     {
-        Invoking(() => _discordServer.CreateServerClan(clanId, clanName))
+        Invoking(() => _discordServer.CreateServerClan(ClanId.FromString(clanId), clanName))
             .Should().Throw<SystemException>();
     }
 

@@ -1,4 +1,3 @@
 ﻿namespace ClanCommander.SharedKernal.Interfaces;
 
-public interface IAggregateRoot
-{ }
+public interface IAggregateRoot { }

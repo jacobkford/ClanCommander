@@ -1,4 +1,6 @@
-﻿namespace ClanCommander.UnitTests.Entities;
+﻿using ClanCommander.ApplicationCore.Entities.ClanAggregate;
+
+namespace ClanCommander.UnitTests.Entities;
 
 public class ClanMemberTests
 {
@@ -8,7 +10,7 @@ public class ClanMemberTests
 
     public ClanMemberTests()
     {
-        _clanMember = new ClanMember(_memberId, _userId);
+        _clanMember = new ClanMember(_memberId, UserId.FromUInt64(_userId));
     }
 
     [Fact]
@@ -16,7 +18,7 @@ public class ClanMemberTests
     {
         // Arrange
         var memberId = "#PQU9QLP2V";
-        var userId = 339924145909399562u;
+        var userId = UserId.FromUInt64(339924145909399562u);
 
         // Act
         var result = new ClanMember(memberId, userId);
@@ -32,7 +34,7 @@ public class ClanMemberTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(string memberId, ulong userId)
     {
-        Invoking(() => new ClanMember(memberId, userId))
+        Invoking(() => new ClanMember(memberId, UserId.FromUInt64(userId)))
             .Should().Throw<SystemException>();
     }
 

@@ -8,7 +8,7 @@ public class UserTests
 
     public UserTests()
     {
-        _user = new User(_userId, _userDiscordUsername);
+        _user = new User(UserId.FromUInt64(_userId), _userDiscordUsername);
     }
 
     [Fact]
@@ -19,11 +19,11 @@ public class UserTests
         var userDiscordUsername = "Jaycub#2554";
 
         // Act
-        var result = new User(userId, userDiscordUsername);
+        var result = new User(UserId.FromUInt64(userId), userDiscordUsername);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().Be(userId);
+        result.Id.Value.Should().Be(userId);
         result.DiscordUsername.Should().Be(userDiscordUsername);
         result.Accounts.Should().BeEmpty();
     }
@@ -32,7 +32,7 @@ public class UserTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(ulong userId, string userDiscordUsername)
     {
-        Invoking(() => new User(userId, userDiscordUsername))
+        Invoking(() => new User(UserId.FromUInt64(userId), userDiscordUsername))
             .Should().Throw<SystemException>();
     }
 

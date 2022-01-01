@@ -1,8 +1,8 @@
-﻿namespace ClanCommander.ApplicationCore.Entities;
+﻿namespace ClanCommander.ApplicationCore.Entities.UserAggregate;
 
 internal class User : Entity, IAggregateRoot
 {
-    public ulong Id { get; private set; }
+    public UserId Id { get; private set; }
 
     public string DiscordUsername { get; private set; }
 
@@ -11,10 +11,13 @@ internal class User : Entity, IAggregateRoot
 
     private User() { }
 
-    public User(ulong id, string discordUsername)
+    public User(UserId id, string discordUsername)
     {
-        Id = Guard.Against.InvalidDiscordSnowflakeId(id, nameof(id));
-        DiscordUsername = Guard.Against.NullOrWhiteSpace(discordUsername, nameof(discordUsername));
+        Guard.Against.InvalidDiscordSnowflakeId(id.Value, nameof(id));
+        Guard.Against.NullOrWhiteSpace(discordUsername, nameof(discordUsername));
+
+        Id = id;
+        DiscordUsername = discordUsername;
     }
 
     public void AddAccount(string accountId, string accountName)

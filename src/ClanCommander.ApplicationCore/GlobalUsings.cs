@@ -1,10 +1,12 @@
 ﻿global using ClanCommander.ApplicationCore.Extensions;
 global using ClanCommander.ApplicationCore.Entities;
+global using ClanCommander.ApplicationCore.Entities.DiscordServerAggregate;
+global using ClanCommander.ApplicationCore.Entities.ClanAggregate;
+global using ClanCommander.ApplicationCore.Entities.UserAggregate;
 global using ClanCommander.ApplicationCore.Data;
 global using ClanCommander.ApplicationCore.Interfaces;
 global using ClanCommander.ApplicationCore.Services;
 global using ClanCommander.ApplicationCore.Constants;
-
 
 global using ClanCommander.SharedKernal.Interfaces;
 global using ClanCommander.SharedKernel.Models;
@@ -35,3 +37,4 @@ global using Google.Apis.Services;
 global using Google.Apis.Util.Store;
 
 global using Ardalis.GuardClauses;
+global using Ardalis.SmartEnum;
