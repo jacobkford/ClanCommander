@@ -1,15 +1,15 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.DiscordServerAggregate;
+﻿namespace ClanCommander.ApplicationCore.Entities.Shared;
 
-[System.ComponentModel.TypeConverter(typeof(DiscordServerIdTypeConverter))]
-[System.Text.Json.Serialization.JsonConverter(typeof(DiscordServerIdJsonConverter))]
-[Newtonsoft.Json.JsonConverter(typeof(DiscordServerIdNewtonsoftJsonConverter))]
-internal partial struct DiscordServerId : IEquatable<DiscordServerId>
+[System.ComponentModel.TypeConverter(typeof(PlayerIdTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(PlayerIdJsonConverter))]
+[Newtonsoft.Json.JsonConverter(typeof(PlayerIdNewtonsoftJsonConverter))]
+partial struct ClashOfClansPlayerId : IEquatable<ClashOfClansPlayerId>
 {
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    private readonly ulong _value;
+    private readonly string _value;
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public ulong Value
+    public string Value
     {
         get
         {
@@ -22,36 +22,50 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
     {
         get
         {
-            return Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return Value;
         }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    private DiscordServerId(ulong value)
+    private ClashOfClansPlayerId(string value)
     {
         _value = value;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static DiscordServerId FromUInt64(ulong value)
+    public static ClashOfClansPlayerId FromString(string value)
     {
-        return new DiscordServerId(value);
+        return new ClashOfClansPlayerId(value);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public override string ToString()
     {
-        return "DiscordServerId { Value = " + ValueAsString + " }";
+        if (Value == null)
+        {
+            return "PlayerId { Value = <null> }";
+        }
+        else
+        {
+            return "PlayerId { Value = " + ValueAsString + " }";
+        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public override int GetHashCode()
     {
-        return Value.GetHashCode();
+        if (Value == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return Value.GetHashCode();
+        }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public bool Equals(DiscordServerId other)
+    public bool Equals(ClashOfClansPlayerId other)
     {
         return Value == other.Value;
     }
@@ -59,9 +73,9 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public override bool Equals(object? other)
     {
-        if (other is DiscordServerId)
+        if (other is ClashOfClansPlayerId)
         {
-            return Equals((DiscordServerId)other);
+            return Equals((ClashOfClansPlayerId)other);
         }
         else
         {
@@ -70,21 +84,21 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static bool operator ==(DiscordServerId a, DiscordServerId b)
+    public static bool operator ==(ClashOfClansPlayerId a, ClashOfClansPlayerId b)
     {
-        return EqualityComparer<DiscordServerId>.Default.Equals(a, b);
+        return EqualityComparer<ClashOfClansPlayerId>.Default.Equals(a, b);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static bool operator !=(DiscordServerId a, DiscordServerId b)
+    public static bool operator !=(ClashOfClansPlayerId a, ClashOfClansPlayerId b)
     {
         return !(a == b);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static DiscordServerId Parse(string value)
+    public static ClashOfClansPlayerId Parse(string value)
     {
-        DiscordServerId result;
+        ClashOfClansPlayerId result;
         if (TryParse(value, out result))
         {
             return result;
@@ -97,58 +111,18 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public static bool TryParse(string value, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-        out DiscordServerId result)
+        out ClashOfClansPlayerId result)
     {
-        ulong id;
-        if (ulong.TryParse(value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out id))
-        {
-            result = new DiscordServerId(id);
-            return true;
-        }
-        else
-        {
-            result = default;
-            return false;
-        }
+        result = new ClashOfClansPlayerId(value);
+        return true;
     }
 
-    [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static DiscordServerId Parse(ReadOnlySpan<char> value)
-    {
-        DiscordServerId result;
-        if (TryParse(value, out result))
-        {
-            return result;
-        }
-        else
-        {
-            throw new FormatException("Value '" + value.ToString() + "' is not valid");
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static bool TryParse(ReadOnlySpan<char> value, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-        out DiscordServerId result)
-    {
-        ulong id;
-        if (ulong.TryParse(value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out id))
-        {
-            result = new DiscordServerId(id);
-            return true;
-        }
-        else
-        {
-            result = default;
-            return false;
-        }
-    }
-
-    private partial class DiscordServerIdTypeConverter : System.ComponentModel.TypeConverter
+    private partial class PlayerIdTypeConverter : System.ComponentModel.TypeConverter
     {
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(ulong) || sourceType == typeof(DiscordServerId);
+            return sourceType == typeof(string) || sourceType == typeof(string) || sourceType == typeof(ClashOfClansPlayerId);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -156,13 +130,13 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
         {
             if (value == null)
             {
-                return default(ulong);
+                return default(string);
             }
             else
             {
-                if (value is ulong)
+                if (value is string)
                 {
-                    return FromUInt64((ulong)value);
+                    return FromString((string)value);
                 }
                 else
                 {
@@ -172,7 +146,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
                     }
                     else
                     {
-                        throw new ArgumentException("Cannot convert '" + value + "' to DiscordServerId");
+                        throw new ArgumentException("Cannot convert '" + value + "' to PlayerId");
                     }
                 }
             }
@@ -181,7 +155,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext? context, System.Type? destinationType)
         {
-            return destinationType == typeof(ulong) || destinationType == typeof(DiscordServerId) || destinationType == typeof(string);
+            return destinationType == typeof(string) || destinationType == typeof(ClashOfClansPlayerId) || destinationType == typeof(string);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -191,17 +165,17 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
             {
                 if (destinationType == typeof(string))
                 {
-                    return ((DiscordServerId)value).ValueAsString;
+                    return ((ClashOfClansPlayerId)value).ValueAsString;
                 }
 
-                if (destinationType == typeof(DiscordServerId))
+                if (destinationType == typeof(ClashOfClansPlayerId))
                 {
                     return value;
                 }
 
-                if (destinationType == typeof(ulong))
+                if (destinationType == typeof(string))
                 {
-                    return ((DiscordServerId)value).Value;
+                    return ((ClashOfClansPlayerId)value).Value;
                 }
             }
 
@@ -209,18 +183,18 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
         }
     }
 
-    private partial class DiscordServerIdJsonConverter : System.Text.Json.Serialization.JsonConverter<DiscordServerId>
+    private partial class PlayerIdJsonConverter : System.Text.Json.Serialization.JsonConverter<ClashOfClansPlayerId>
     {
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, DiscordServerId value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(System.Text.Json.Utf8JsonWriter writer, ClashOfClansPlayerId value, System.Text.Json.JsonSerializerOptions options)
         {
-            writer.WriteNumberValue(value.Value);
+            writer.WriteStringValue(value.Value);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-        public override DiscordServerId Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override ClashOfClansPlayerId Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            DiscordServerId value = default;
+            var value = default(ClashOfClansPlayerId);
             if (reader.TokenType == System.Text.Json.JsonTokenType.StartObject)
             {
                 bool valueRead = false;
@@ -231,7 +205,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
                     {
                         reader.Read();
 #nullable disable
-                        value = new DiscordServerId(reader.GetUInt64());
+                        value = new ClashOfClansPlayerId(reader.GetString());
 #nullable enable
                         valueRead = true;
                         reader.Read();
@@ -246,7 +220,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
             else
             {
 #nullable disable
-                value = new DiscordServerId(reader.GetUInt64());
+                value = new ClashOfClansPlayerId(reader.GetString());
 #nullable enable
             }
 
@@ -254,7 +228,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
         }
     }
 
-    private partial class DiscordServerIdNewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter
+    private partial class PlayerIdNewtonsoftJsonConverter : Newtonsoft.Json.JsonConverter
     {
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanRead
@@ -277,7 +251,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvert(System.Type type)
         {
-            return type == typeof(DiscordServerId);
+            return type == typeof(ClashOfClansPlayerId);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -289,14 +263,14 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
             }
             else
             {
-                writer.WriteValue(((DiscordServerId)value).Value);
+                writer.WriteValue(((ClashOfClansPlayerId)value).Value);
             }
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override object? ReadJson(Newtonsoft.Json.JsonReader reader, System.Type objectType, object? existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            DiscordServerId value = default;
+            var value = default(ClashOfClansPlayerId);
             if (reader.TokenType == Newtonsoft.Json.JsonToken.StartObject)
             {
                 bool valueRead = false;
@@ -307,7 +281,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
                     {
                         reader.Read();
 #nullable disable
-                        value = new DiscordServerId(serializer.Deserialize<ulong>(reader));
+                        value = new ClashOfClansPlayerId(serializer.Deserialize<string>(reader));
 #nullable enable
                         valueRead = true;
                         reader.Read();
@@ -322,7 +296,7 @@ internal partial struct DiscordServerId : IEquatable<DiscordServerId>
             else
             {
 #nullable disable
-                value = new DiscordServerId(serializer.Deserialize<ulong>(reader));
+                value = new ClashOfClansPlayerId(serializer.Deserialize<string>(reader));
 #nullable enable
             }
 
