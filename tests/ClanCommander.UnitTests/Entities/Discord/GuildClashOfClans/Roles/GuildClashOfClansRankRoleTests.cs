@@ -50,7 +50,7 @@ public class GuildClashOfClansRankRoleTests
     public void ChangeDiscordRole_ShouldThrowException_WhenInvalidIdProvided()
     {
         Invoking(() => _stubRankRole.ChangeDiscordRole(1))
-            .Should().Throw<InvalidOperationException>();
+            .Should().Throw<SystemException>();
     }
 
     public static IEnumerable<object[]> InvalidConstructorParameters =>
