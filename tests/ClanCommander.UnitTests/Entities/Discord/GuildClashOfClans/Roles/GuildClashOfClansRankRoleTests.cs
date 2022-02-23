@@ -1,7 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Roles;
-using ClanCommander.ApplicationCore.Entities.Guild;
-
-namespace ClanCommander.UnitTests.Entities.Discord.GuildClashOfClans.Roles;
+﻿namespace ClanCommander.UnitTests.Entities.Discord.GuildClashOfClans.Roles;
 public class GuildClashOfClansRankRoleTests
 {
     private readonly DiscordGuildId _stubDiscordServerId = DiscordGuildId.FromUInt64(760910445686161488u);
@@ -32,7 +29,7 @@ public class GuildClashOfClansRankRoleTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParametersAreInvalid(ulong guildId, ulong roleId)
     {
-        Invoking(() => new GuildClashOfClansRankRole(_stubDiscordServerId, guildId, ClashOfClansClanRole.Elder))
+        Invoking(() => new GuildClashOfClansRankRole(DiscordGuildId.FromUInt64(guildId), roleId, ClashOfClansClanRole.Elder))
             .Should().Throw<SystemException>();
     }
 
