@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Users.Events;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Users.Events;
 
 internal class UserAccountRemovedEvent : DomainEvent
 {

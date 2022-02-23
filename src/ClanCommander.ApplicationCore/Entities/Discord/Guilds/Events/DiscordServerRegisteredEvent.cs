@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Guild.Events;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Guilds.Events;
 
 internal class DiscordServerRegisteredEvent : DomainEvent
 {

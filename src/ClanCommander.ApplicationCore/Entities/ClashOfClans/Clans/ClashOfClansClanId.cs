@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.ClashOfClans;
+﻿namespace ClanCommander.ApplicationCore.Entities.ClashOfClans.Clans;
 
 [System.ComponentModel.TypeConverter(typeof(ClanIdTypeConverter))]
 [System.Text.Json.Serialization.JsonConverter(typeof(ClanIdJsonConverter))]

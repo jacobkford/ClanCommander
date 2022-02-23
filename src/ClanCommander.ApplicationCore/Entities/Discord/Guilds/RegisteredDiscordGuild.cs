@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Guild;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Guilds;
 
 using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Clans;
 

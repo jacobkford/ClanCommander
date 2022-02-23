@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Guild;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Guilds;
 
 [System.ComponentModel.TypeConverter(typeof(DiscordServerIdTypeConverter))]
 [System.Text.Json.Serialization.JsonConverter(typeof(DiscordServerIdJsonConverter))]
