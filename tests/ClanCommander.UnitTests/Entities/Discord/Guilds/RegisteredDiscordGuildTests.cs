@@ -82,7 +82,7 @@ public class RegisteredDiscordGuildTests
         new List<object[]>
         {
             new object[] { (ulong)1, "PlaneClashers", 760910445686161488u },
-            new object[] { "#9UGQ0GL", "", 760910445686161488u },
+            new object[] { 339924145909399562u, "", 760910445686161488u },
             new object[] { 339924145909399562u, "PlaneClashers", (ulong)1 }
         };
 }
