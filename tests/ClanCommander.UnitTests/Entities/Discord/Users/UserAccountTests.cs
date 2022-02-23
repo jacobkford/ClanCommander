@@ -1,7 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Entities.Discord.Users;
-using ClanCommander.ApplicationCore.Entities.Shared;
-
-namespace ClanCommander.UnitTests.Entities.Discord.Users;
+﻿namespace ClanCommander.UnitTests.Entities.Discord.Users;
 
 public class UserAccountTests
 {

@@ -1,6 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Entities.Guild;
-
-namespace ClanCommander.UnitTests.Entities.Discord.Guilds;
+﻿namespace ClanCommander.UnitTests.Entities.Discord.Guilds;
 
 public class RegisteredDiscordGuildTests
 {

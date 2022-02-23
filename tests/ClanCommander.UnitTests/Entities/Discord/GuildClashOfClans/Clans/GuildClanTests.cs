@@ -1,8 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Clans;
-using ClanCommander.ApplicationCore.Entities.Guild;
-using ClanCommander.ApplicationCore.Entities.Shared;
-
-namespace ClanCommander.UnitTests.Entities.Discord.GuildClashOfClans.Clans;
+﻿namespace ClanCommander.UnitTests.Entities.Discord.GuildClashOfClans.Clans;
 
 public class GuildClanTests
 {
