@@ -1,14 +1,14 @@
 ﻿namespace ClanCommander.UnitTests.Entities.Discord.Users;
 
-public class UserAccountTests
+public class DiscordUserClashOfClansAccountTests
 {
-    private readonly ClashOfClansPlayerId _userAccountId = ClashOfClansPlayerId.FromString("#PQU9QLP2V");
+    private readonly PlayerId _userAccountId = PlayerId.FromString("#PQU9QLP2V");
     private readonly string _userAccountName = "JAY";
-    private readonly UserClashOfClansAccount _userAccount;
+    private readonly DiscordUserClashOfClansAccount _userAccount;
 
-    public UserAccountTests()
+    public DiscordUserClashOfClansAccountTests()
     {
-        _userAccount = new UserClashOfClansAccount(_userAccountId, _userAccountName);
+        _userAccount = new DiscordUserClashOfClansAccount(_userAccountId, _userAccountName);
     }
 
     [Fact]
@@ -16,7 +16,7 @@ public class UserAccountTests
     {
         // Arrange
         // Act
-        var result = new UserClashOfClansAccount(_userAccountId, _userAccountName);
+        var result = new DiscordUserClashOfClansAccount(_userAccountId, _userAccountName);
 
         // Assert
         result.Should().NotBeNull();
@@ -28,7 +28,7 @@ public class UserAccountTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(string userAccountId, string userAccountName)
     {
-        Invoking(() => new UserClashOfClansAccount(ClashOfClansPlayerId.FromString(userAccountId), userAccountName))
+        Invoking(() => new DiscordUserClashOfClansAccount(PlayerId.FromString(userAccountId), userAccountName))
             .Should().Throw<SystemException>();
     }
 

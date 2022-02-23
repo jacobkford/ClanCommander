@@ -2,12 +2,9 @@
 global using ClanCommander.ApplicationCore.Data;
 global using ClanCommander.ApplicationCore.Data.ValueConverters;
 global using ClanCommander.ApplicationCore.Entities.ClashOfClans;
-global using ClanCommander.ApplicationCore.Entities.ClashOfClans.Clans;
-global using ClanCommander.ApplicationCore.Entities.ClashOfClans.Clans.Events;
-global using ClanCommander.ApplicationCore.Entities.ClashOfClans.Players;
+global using ClanCommander.ApplicationCore.Entities.ClashOfClans.Events;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
-global using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Roles;
-global using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Clans;
+global using ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds.Events;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users.Events;

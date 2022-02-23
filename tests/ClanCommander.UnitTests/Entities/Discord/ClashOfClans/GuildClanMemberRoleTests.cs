@@ -1,13 +1,14 @@
-﻿namespace ClanCommander.UnitTests.Entities.Discord.GuildClashOfClans.Roles;
-public class GuildClashOfClansRankRoleTests
+﻿namespace ClanCommander.UnitTests.Entities.Discord.ClashOfClans;
+
+public class GuildClanMemberRoleTests
 {
     private readonly DiscordGuildId _stubDiscordServerId = DiscordGuildId.FromUInt64(760910445686161488u);
     private readonly ulong _stubRoleId = 339924145909399562u;
-    private readonly GuildClashOfClansRankRole _stubRankRole;
+    private readonly GuildClanMemberRole _stubRankRole;
 
-    public GuildClashOfClansRankRoleTests()
+    public GuildClanMemberRoleTests()
     {
-        _stubRankRole = new GuildClashOfClansRankRole(_stubDiscordServerId, _stubRoleId, ClashOfClansClanRole.CoLeader);
+        _stubRankRole = new GuildClanMemberRole(_stubDiscordServerId, _stubRoleId, ClanMemberRole.CoLeader);
     }
 
     [Fact]
@@ -15,13 +16,13 @@ public class GuildClashOfClansRankRoleTests
     {
         // Arrange
         // Act
-        var role = new GuildClashOfClansRankRole(_stubDiscordServerId, _stubRoleId, ClashOfClansClanRole.CoLeader);
+        var role = new GuildClanMemberRole(_stubDiscordServerId, _stubRoleId, ClanMemberRole.CoLeader);
 
         // Assert
         role.Should().NotBeNull();
         role.GuildId.Should().Be(_stubDiscordServerId);
         role.DiscordRoleId.Should().Be(_stubRoleId);
-        role.InGameRole.Should().Be(ClashOfClansClanRole.CoLeader);
+        role.InGameRole.Should().Be(ClanMemberRole.CoLeader);
 
     }
 
@@ -29,7 +30,7 @@ public class GuildClashOfClansRankRoleTests
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParametersAreInvalid(ulong guildId, ulong roleId)
     {
-        Invoking(() => new GuildClashOfClansRankRole(DiscordGuildId.FromUInt64(guildId), roleId, ClashOfClansClanRole.Elder))
+        Invoking(() => new GuildClanMemberRole(DiscordGuildId.FromUInt64(guildId), roleId, ClanMemberRole.Elder))
             .Should().Throw<SystemException>();
     }
 

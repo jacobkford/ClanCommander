@@ -1,17 +1,20 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Roles;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
 
-internal class GuildClashOfClansRankRole : Entity, IAggregateRoot
+/// <summary>
+/// Discord Guild Role that represents a Clash Of Clans Role
+/// </summary>
+internal class GuildClanMemberRole : Entity, IAggregateRoot
 {
     public DiscordGuildId GuildId { get; private set; }
 
     public ulong DiscordRoleId { get; private set; }
 
-    public ClashOfClansClanRole InGameRole { get; private set; }
+    public ClanMemberRole InGameRole { get; private set; }
 
-    public GuildClashOfClansRankRole(
+    public GuildClanMemberRole(
         DiscordGuildId guildId,
         ulong memberDiscordRoleId,
-        ClashOfClansClanRole inGameRole)
+        ClanMemberRole inGameRole)
     {
         Guard.Against.InvalidDiscordSnowflakeId(guildId.Value, nameof(guildId));
         Guard.Against.InvalidDiscordSnowflakeId(memberDiscordRoleId, nameof(memberDiscordRoleId));

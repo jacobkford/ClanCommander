@@ -6,8 +6,8 @@ internal class DiscordUser : Entity, IAggregateRoot
 
     public string Username { get; private set; }
 
-    public IReadOnlyCollection<UserClashOfClansAccount> Accounts => _accounts.AsReadOnly();
-    private readonly List<UserClashOfClansAccount> _accounts = new List<UserClashOfClansAccount>();
+    public IReadOnlyCollection<DiscordUserClashOfClansAccount> Accounts => _accounts.AsReadOnly();
+    private readonly List<DiscordUserClashOfClansAccount> _accounts = new List<DiscordUserClashOfClansAccount>();
 
     private DiscordUser() { }
 
@@ -22,7 +22,7 @@ internal class DiscordUser : Entity, IAggregateRoot
         AddDomainEvent(new UserCreatedEvent());
     }
 
-    public void AddAccount(ClashOfClansPlayerId accountId, string accountName)
+    public void AddAccount(PlayerId accountId, string accountName)
     {
         var accountAlreadyExists = _accounts.Any(account => account.AccountId == accountId);
 
@@ -31,14 +31,14 @@ internal class DiscordUser : Entity, IAggregateRoot
             throw new ArgumentException($"{accountId} has already been added");
         }
 
-        var account = new UserClashOfClansAccount(accountId, accountName);
+        var account = new DiscordUserClashOfClansAccount(accountId, accountName);
 
         _accounts.Add(account);
 
         AddDomainEvent(new UserAccountAddedEvent());
     }
 
-    public void RemoveAccount(ClashOfClansPlayerId accountId)
+    public void RemoveAccount(PlayerId accountId)
     {
         var account = _accounts.SingleOrDefault(account => account.AccountId == accountId);
 

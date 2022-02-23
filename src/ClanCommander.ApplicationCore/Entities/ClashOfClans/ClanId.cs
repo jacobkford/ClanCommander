@@ -1,9 +1,9 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.ClashOfClans.Clans;
+﻿namespace ClanCommander.ApplicationCore.Entities.ClashOfClans;
 
 [System.ComponentModel.TypeConverter(typeof(ClanIdTypeConverter))]
 [System.Text.Json.Serialization.JsonConverter(typeof(ClanIdJsonConverter))]
 [Newtonsoft.Json.JsonConverter(typeof(ClanIdNewtonsoftJsonConverter))]
-internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
+internal partial struct ClanId : IEquatable<ClanId>
 {
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     private readonly string _value;
@@ -27,15 +27,15 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    private ClashOfClansClanId(string value)
+    private ClanId(string value)
     {
         _value = value;
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static ClashOfClansClanId FromString(string value)
+    public static ClanId FromString(string value)
     {
-        return new ClashOfClansClanId(value);
+        return new ClanId(value);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -65,7 +65,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public bool Equals(ClashOfClansClanId other)
+    public bool Equals(ClanId other)
     {
         return Value == other.Value;
     }
@@ -73,9 +73,9 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public override bool Equals(object? other)
     {
-        if (other is ClashOfClansClanId)
+        if (other is ClanId)
         {
-            return Equals((ClashOfClansClanId)other);
+            return Equals((ClanId)other);
         }
         else
         {
@@ -84,21 +84,21 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static bool operator ==(ClashOfClansClanId a, ClashOfClansClanId b)
+    public static bool operator ==(ClanId a, ClanId b)
     {
-        return EqualityComparer<ClashOfClansClanId>.Default.Equals(a, b);
+        return EqualityComparer<ClanId>.Default.Equals(a, b);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static bool operator !=(ClashOfClansClanId a, ClashOfClansClanId b)
+    public static bool operator !=(ClanId a, ClanId b)
     {
         return !(a == b);
     }
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-    public static ClashOfClansClanId Parse(string value)
+    public static ClanId Parse(string value)
     {
-        ClashOfClansClanId result;
+        ClanId result;
         if (TryParse(value, out result))
         {
             return result;
@@ -111,9 +111,9 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
 
     [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
     public static bool TryParse(string value, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)]
-        out ClashOfClansClanId result)
+        out ClanId result)
     {
-        result = new ClashOfClansClanId(value);
+        result = new ClanId(value);
         return true;
     }
 
@@ -122,7 +122,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Type sourceType)
         {
-            return sourceType == typeof(string) || sourceType == typeof(string) || sourceType == typeof(ClashOfClansClanId);
+            return sourceType == typeof(string) || sourceType == typeof(string) || sourceType == typeof(ClanId);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -155,7 +155,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext? context, System.Type? destinationType)
         {
-            return destinationType == typeof(string) || destinationType == typeof(ClashOfClansClanId) || destinationType == typeof(string);
+            return destinationType == typeof(string) || destinationType == typeof(ClanId) || destinationType == typeof(string);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -165,17 +165,17 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
             {
                 if (destinationType == typeof(string))
                 {
-                    return ((ClashOfClansClanId)value).ValueAsString;
+                    return ((ClanId)value).ValueAsString;
                 }
 
-                if (destinationType == typeof(ClashOfClansClanId))
+                if (destinationType == typeof(ClanId))
                 {
                     return value;
                 }
 
                 if (destinationType == typeof(string))
                 {
-                    return ((ClashOfClansClanId)value).Value;
+                    return ((ClanId)value).Value;
                 }
             }
 
@@ -183,18 +183,18 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
         }
     }
 
-    private partial class ClanIdJsonConverter : System.Text.Json.Serialization.JsonConverter<ClashOfClansClanId>
+    private partial class ClanIdJsonConverter : System.Text.Json.Serialization.JsonConverter<ClanId>
     {
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-        public override void Write(System.Text.Json.Utf8JsonWriter writer, ClashOfClansClanId value, System.Text.Json.JsonSerializerOptions options)
+        public override void Write(System.Text.Json.Utf8JsonWriter writer, ClanId value, System.Text.Json.JsonSerializerOptions options)
         {
             writer.WriteStringValue(value.Value);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
-        public override ClashOfClansClanId Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+        public override ClanId Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
         {
-            ClashOfClansClanId value = default;
+            ClanId value = default;
             if (reader.TokenType == System.Text.Json.JsonTokenType.StartObject)
             {
                 bool valueRead = false;
@@ -205,7 +205,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
                     {
                         reader.Read();
 #nullable disable
-                        value = new ClashOfClansClanId(reader.GetString());
+                        value = new ClanId(reader.GetString());
 #nullable enable
                         valueRead = true;
                         reader.Read();
@@ -220,7 +220,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
             else
             {
 #nullable disable
-                value = new ClashOfClansClanId(reader.GetString());
+                value = new ClanId(reader.GetString());
 #nullable enable
             }
 
@@ -251,7 +251,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override bool CanConvert(System.Type type)
         {
-            return type == typeof(ClashOfClansClanId);
+            return type == typeof(ClanId);
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
@@ -263,14 +263,14 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
             }
             else
             {
-                writer.WriteValue(((ClashOfClansClanId)value).Value);
+                writer.WriteValue(((ClanId)value).Value);
             }
         }
 
         [System.CodeDom.Compiler.GeneratedCode("Meziantou.Framework.StronglyTypedId", "1.0.17.0")]
         public override object? ReadJson(Newtonsoft.Json.JsonReader reader, System.Type objectType, object? existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            ClashOfClansClanId value = default;
+            ClanId value = default;
             if (reader.TokenType == Newtonsoft.Json.JsonToken.StartObject)
             {
                 bool valueRead = false;
@@ -281,7 +281,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
                     {
                         reader.Read();
 #nullable disable
-                        value = new ClashOfClansClanId(serializer.Deserialize<string>(reader));
+                        value = new ClanId(serializer.Deserialize<string>(reader));
 #nullable enable
                         valueRead = true;
                         reader.Read();
@@ -296,7 +296,7 @@ internal partial struct ClashOfClansClanId : IEquatable<ClashOfClansClanId>
             else
             {
 #nullable disable
-                value = new ClashOfClansClanId(serializer.Deserialize<string>(reader));
+                value = new ClanId(serializer.Deserialize<string>(reader));
 #nullable enable
             }
 

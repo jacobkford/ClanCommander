@@ -1,7 +1,5 @@
 ﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Guilds;
 
-using ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Clans;
-
 internal class RegisteredDiscordGuild : Entity, IAggregateRoot
 {
     public DiscordGuildId ServerId { get; private set; }
@@ -40,7 +38,7 @@ internal class RegisteredDiscordGuild : Entity, IAggregateRoot
 
 internal static class RegisteredDiscordGuildExtensions
 {
-    public static GuildClan CreateClashOfClansClan(this RegisteredDiscordGuild instance, ClashOfClansClanId clanId, string clanName)
+    public static GuildClan CreateClashOfClansClan(this RegisteredDiscordGuild instance, ClanId clanId, string clanName)
     {
         return new GuildClan(clanId, clanName, instance.ServerId);
     }

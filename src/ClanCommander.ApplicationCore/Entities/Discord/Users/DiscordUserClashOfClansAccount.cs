@@ -1,12 +1,12 @@
 ﻿namespace ClanCommander.ApplicationCore.Entities.Discord.Users;
 
-internal class UserClashOfClansAccount : Entity
+internal class DiscordUserClashOfClansAccount : Entity
 {
-    public ClashOfClansPlayerId AccountId { get; private set; }
+    public PlayerId AccountId { get; private set; }
 
     public string Name { get; private set; }
     
-    public UserClashOfClansAccount(ClashOfClansPlayerId accountId, string accountName)
+    public DiscordUserClashOfClansAccount(PlayerId accountId, string accountName)
     {
         Guard.Against.InvalidClashOfClansTag(accountId.Value, nameof(accountId));
         Guard.Against.NullOrWhiteSpace(accountName, nameof(accountName));

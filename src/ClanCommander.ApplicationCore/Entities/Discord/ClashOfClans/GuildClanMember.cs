@@ -1,14 +1,14 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Discord.GuildClashOfClans.Clans;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
 
 internal class GuildClanMember : Entity
 {
-    public ClashOfClansPlayerId MemberId { get; private set; }
+    public PlayerId MemberId { get; private set; }
 
     public DiscordUserId UserId { get; private set; }
 
-    public ClashOfClansClanRole ClanRole { get; private set; }
+    public ClanMemberRole ClanRole { get; private set; }
 
-    public GuildClanMember(ClashOfClansPlayerId memberId, DiscordUserId userId, ClashOfClansClanRole clanRole)
+    public GuildClanMember(PlayerId memberId, DiscordUserId userId, ClanMemberRole clanRole)
     {
         MemberId = memberId;
         UserId = userId;

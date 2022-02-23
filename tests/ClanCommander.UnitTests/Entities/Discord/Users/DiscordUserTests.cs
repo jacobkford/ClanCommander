@@ -1,12 +1,12 @@
 ﻿namespace ClanCommander.UnitTests.Entities.Discord.Users;
 
-public class UserTests
+public class DiscordUserTests
 {
     private readonly ulong _userId = 339924145909399562u;
     private readonly string _userDiscordUsername = "Jaycub#2554";
     private readonly DiscordUser _user;
 
-    public UserTests()
+    public DiscordUserTests()
     {
         _user = new DiscordUser(DiscordUserId.FromUInt64(_userId), _userDiscordUsername);
     }
@@ -40,7 +40,7 @@ public class UserTests
     public void AddAccount_ShouldAddAccountToList_WhenAllParametersAreValid()
     {
         // Arrange
-        var accountId = ClashOfClansPlayerId.FromString("#PQU9QLP2V");
+        var accountId = PlayerId.FromString("#PQU9QLP2V");
         var accountName = "JAY";
 
         // Act
@@ -56,7 +56,7 @@ public class UserTests
     public void AddAccount_ShouldThrowException_WhenAddingDuplicateAccount()
     {
         // Arrange
-        var accountId = ClashOfClansPlayerId.FromString("#PQU9QLP2V");
+        var accountId = PlayerId.FromString("#PQU9QLP2V");
         var accountName = "JAY";
         _user.AddAccount(accountId, accountName);
 
