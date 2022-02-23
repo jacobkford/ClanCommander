@@ -1,37 +1,37 @@
-﻿namespace ClanCommander.UnitTests.Entities;
+﻿using ClanCommander.ApplicationCore.Entities.Discord.Users;
+using ClanCommander.ApplicationCore.Entities.Shared;
+
+namespace ClanCommander.UnitTests.Entities.Discord.Users;
 
 public class UserAccountTests
 {
-    private readonly string _userAccountId = "#PQU9QLP2V";
+    private readonly ClashOfClansPlayerId _userAccountId = ClashOfClansPlayerId.FromString("#PQU9QLP2V");
     private readonly string _userAccountName = "JAY";
-    private readonly UserAccount _userAccount;
+    private readonly UserClashOfClansAccount _userAccount;
 
     public UserAccountTests()
     {
-        _userAccount = new UserAccount(_userAccountId, _userAccountName);
+        _userAccount = new UserClashOfClansAccount(_userAccountId, _userAccountName);
     }
 
     [Fact]
     public void Constructor_ShouldCreateUserAccount_WhenAllParametersAreValid()
     {
         // Arrange
-        var userAccountId = "#PQU9QLP2V";
-        var userAccountName = "JAY";
-
         // Act
-        var result = new UserAccount(userAccountId, userAccountName);
+        var result = new UserClashOfClansAccount(_userAccountId, _userAccountName);
 
         // Assert
         result.Should().NotBeNull();
-        result.Id.Should().Be(userAccountId);
-        result.Name.Should().Be(userAccountName);
+        result.AccountId.Should().Be(_userAccountId);
+        result.Name.Should().Be(_userAccountName);
     }
 
     [Theory]
     [MemberData(nameof(InvalidConstructorParameters))]
     public void Constructor_ShouldThrowException_WhenParameterIsInvalid(string userAccountId, string userAccountName)
     {
-        Invoking(() => new UserAccount(userAccountId, userAccountName))
+        Invoking(() => new UserClashOfClansAccount(ClashOfClansPlayerId.FromString(userAccountId), userAccountName))
             .Should().Throw<SystemException>();
     }
 
