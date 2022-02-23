@@ -13,7 +13,7 @@ public class RegisteredDiscordGuildTests
     }
 
     [Fact]
-    public void Constructor_ShouldGuild_WhenAllParametersAreValid()
+    public void Constructor_ShouldCreateGuild_WhenAllParametersAreValid()
     {
         // Arrange
         var discordGuildId = DiscordGuildId.FromUInt64(760910445686161488u);

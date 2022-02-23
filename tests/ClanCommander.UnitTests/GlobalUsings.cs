@@ -1,6 +1,5 @@
 ﻿global using ClanCommander.ApplicationCore.Constants;
 global using ClanCommander.ApplicationCore.Data;
-global using ClanCommander.ApplicationCore.Data.ValueConverters;
 global using ClanCommander.ApplicationCore.Entities.ClashOfClans;
 global using ClanCommander.ApplicationCore.Entities.ClashOfClans.Events;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
@@ -8,11 +7,6 @@ global using ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds.Events;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users.Events;
-global using ClanCommander.ApplicationCore.Entities.Greeting;
-global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans;
-global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Events;
-global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Interview.Events;
-global using ClanCommander.ApplicationCore.Entities.Logging;
 global using ClanCommander.ApplicationCore.Entities.MessageCommands;
 global using ClanCommander.ApplicationCore.Entities.Shared;
 global using ClanCommander.ApplicationCore.Extensions;

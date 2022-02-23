@@ -10,7 +10,6 @@ global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds.Events;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users.Events;
-global using ClanCommander.ApplicationCore.Entities.Greeting;
 global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans;
 global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Events;
 global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Interview.Events;
