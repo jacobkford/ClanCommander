@@ -10,8 +10,6 @@ internal class RegisteredDiscordGuild : Entity, IAggregateRoot
 
     public DiscordUserId OwnerId { get; private set; }
 
-    private RegisteredDiscordGuild() { }
-
     public RegisteredDiscordGuild(DiscordGuildId id, string name, DiscordUserId ownerId)
     {
         Guard.Against.InvalidDiscordSnowflakeId(id.Value, nameof(id));
