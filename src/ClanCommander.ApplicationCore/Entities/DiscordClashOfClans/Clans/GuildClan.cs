@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
+﻿namespace ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Clans;
 
 internal class GuildClan : Entity, IAggregateRoot
 {

@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.Discord.ClashOfClans;
+﻿namespace ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Clans;
 
 /// <summary>
 /// Discord Guild Role that represents a Clash Of Clans Role

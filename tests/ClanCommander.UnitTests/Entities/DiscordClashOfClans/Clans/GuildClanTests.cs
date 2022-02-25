@@ -1,5 +1,4 @@
-﻿namespace ClanCommander.UnitTests.Entities.Discord.ClashOfClans;
-
+﻿namespace ClanCommander.UnitTests.Entities.DiscordClashOfClans.Users;
 public class GuildClanTests
 {
     private readonly ClanId _stubClanId = ClanId.FromString("#9UGQ0GL");

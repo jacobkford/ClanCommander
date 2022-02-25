@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.UnitTests.Entities.Discord.ClashOfClans;
+﻿namespace ClanCommander.UnitTests.Entities.DiscordClashOfClans.Users;
 
 public class GuildClanMemberTest
 {
