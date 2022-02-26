@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,44 +9,36 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Repositories\" />
-    <Folder Include="Entities\ClashOfClans\ClanEvents\Events\" />
-    <Folder Include="Entities\Discord\GuildMessageCommands\Events\" />
-    <Folder Include="Entities\Discord\Users\" />
-    <Folder Include="Entities\Discord\GuildEntrySystems\ClashOfClans\InterviewMessages\" />
-    <Folder Include="Features\EntrySystem\Handlers\Commands\" />
-    <Folder Include="Features\EntrySystem\Handlers\Queries\" />
-    <Folder Include="Features\Moderation\" />
-    <Folder Include="Features\ClanWarLeaguesManager\" />
-    <Folder Include="Features\SetupWizards\" />
-    <Folder Include="Features\System\" />
-    <Folder Include="Features\Social\" />
+    <Folder Include="Entities\Discord\MessageCommands\Events\" />
+    <Folder Include="Entities\DiscordClashOfClans\GuildEntrySystems\ClashOfClans\InterviewMessages\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" Version="3.3.0" />
+    <PackageReference Include="Ardalis.GuardClauses" Version="4.0.0" />
     <PackageReference Include="Ardalis.SmartEnum" Version="2.0.1" />
     <PackageReference Include="ClashOfClans" Version="8.4.0" />
-    <PackageReference Include="Discord.Net" Version="3.1.0" />
-    <PackageReference Include="Fergun.Interactive" Version="1.3.0" />
-    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.55.0.2510" />
+    <PackageReference Include="Discord.Net" Version="3.3.2" />
+    <PackageReference Include="Fergun.Interactive" Version="1.4.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Meziantou.Framework.StronglyTypedId" Version="1.0.17">
+    <PackageReference Include="Meziantou.Framework.StronglyTypedId" Version="1.0.19">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
