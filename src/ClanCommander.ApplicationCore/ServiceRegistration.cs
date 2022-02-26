@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace ClanCommander.ApplicationCore;
+﻿namespace ClanCommander.ApplicationCore;
 
 public static class ServiceRegistration
 {
     public static IServiceCollection AddApplicationCore(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options 
+        services.AddDbContext<ApplicationDbContext>(options
             => options.UseNpgsql(configuration.GetConnectionString("PostgreSQL")));
 
         services.AddClashOfClans(options =>
@@ -14,6 +12,19 @@ public static class ServiceRegistration
             options.Tokens.Add(configuration["ClashOfClans:Token"]);
         });
 
+        services.AddTransient<ApplicationDbContextSeeder>();
+
         return services;
+    }
+
+    public static async Task SeedDatabaseAsync(this IHost app)
+    {
+        var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+        using var scope = scopedFactory.CreateScope();
+
+        var service = scope.ServiceProvider.GetService<ApplicationDbContextSeeder>();
+
+        await service.SeedAsync();
     }
 }
