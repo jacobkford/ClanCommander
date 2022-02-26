@@ -43,6 +43,7 @@ try
             services.AddApplicationCore(context.Configuration);
         }).Build();
 
+    await host.SeedDatabaseAsync();
     await host.RunAsync();
     return 0;
 }
