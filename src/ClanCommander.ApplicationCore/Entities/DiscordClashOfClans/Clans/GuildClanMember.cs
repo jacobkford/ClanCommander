@@ -8,6 +8,11 @@ internal class GuildClanMember : Entity
 
     public ClanMemberRole ClanRole { get; private set; }
 
+#pragma warning disable CS8618
+    // For EF Core
+    private GuildClanMember() { }
+#pragma warning restore CS8618
+
     public GuildClanMember(PlayerId memberId, DiscordUserId userId, ClanMemberRole clanRole)
     {
         MemberId = memberId;

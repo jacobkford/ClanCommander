@@ -2,11 +2,16 @@
 
 internal class RegisteredDiscordGuild : Entity, IAggregateRoot
 {
-    public DiscordGuildId ServerId { get; private set; }
+    public DiscordGuildId GuildId { get; private set; }
 
     public string Name { get; private set; }
 
     public DiscordUserId OwnerId { get; private set; }
+
+#pragma warning disable CS8618
+    // For EF Core
+    private RegisteredDiscordGuild() { }
+#pragma warning restore CS8618 
 
     public RegisteredDiscordGuild(DiscordGuildId id, string name, DiscordUserId ownerId)
     {
@@ -14,7 +19,7 @@ internal class RegisteredDiscordGuild : Entity, IAggregateRoot
         Guard.Against.NullOrWhiteSpace(name, nameof(name));
         Guard.Against.InvalidDiscordSnowflakeId(ownerId.Value, nameof(ownerId));
 
-        ServerId = id;
+        GuildId = id;
         Name = name;
         OwnerId = ownerId;
 
@@ -40,7 +45,7 @@ internal static class RegisteredDiscordGuildExtensions
 {
     public static GuildClan CreateClashOfClansClan(this RegisteredDiscordGuild instance, ClanId clanId, string clanName)
     {
-        return new GuildClan(clanId, clanName, instance.ServerId);
+        return new GuildClan(clanId, clanName, instance.GuildId);
     }
 }
 

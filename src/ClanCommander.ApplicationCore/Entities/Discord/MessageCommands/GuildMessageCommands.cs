@@ -6,6 +6,12 @@ internal class GuildMessageCommands : Entity, IAggregateRoot
 
     public string MessageCommandPrefix { get; private set; }
 
+
+#pragma warning disable CS8618
+    // For EF Core
+    private GuildMessageCommands() { }
+#pragma warning restore CS8618
+
     public GuildMessageCommands(DiscordGuildId guildId)
     {
         Guard.Against.InvalidDiscordSnowflakeId(guildId.Value, nameof(guildId));

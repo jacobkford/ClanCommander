@@ -13,6 +13,11 @@ internal class GuildClan : Entity, IAggregateRoot
     public IReadOnlyCollection<GuildClanMember> Members => _members.AsReadOnly();
     private readonly List<GuildClanMember> _members = new List<GuildClanMember>();
 
+#pragma warning disable CS8618
+    // For EF Core
+    private GuildClan() { }
+#pragma warning restore CS8618
+
     public GuildClan(ClanId clanId, string clanName, DiscordGuildId guildId)
     {
         Guard.Against.InvalidClashOfClansTag(clanId.Value, nameof(clanId));

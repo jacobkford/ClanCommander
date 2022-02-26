@@ -11,6 +11,11 @@ internal class GuildClanMemberRole : Entity, IAggregateRoot
 
     public ClanMemberRole InGameRole { get; private set; }
 
+#pragma warning disable CS8618
+    // For EF Core
+    private GuildClanMemberRole() { }
+#pragma warning restore CS8618
+
     public GuildClanMemberRole(
         DiscordGuildId guildId,
         ulong memberDiscordRoleId,
