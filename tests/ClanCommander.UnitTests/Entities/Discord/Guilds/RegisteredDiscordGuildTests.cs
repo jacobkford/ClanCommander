@@ -25,7 +25,7 @@ public class RegisteredDiscordGuildTests
 
         // Assert
         newGuild.Should().NotBeNull();
-        newGuild.ServerId.Should().Be(discordGuildId);
+        newGuild.GuildId.Should().Be(discordGuildId);
         newGuild.Name.Should().Be(guildName);
         newGuild.OwnerId.Should().Be(guildOwnerId);
     }
