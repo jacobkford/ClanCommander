@@ -1,0 +1,15 @@
+﻿global using ClanCommander.ApplicationCore.Data;
+global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
+global using ClanCommander.ApplicationCore.Entities.Discord.Users;
+global using ClanCommander.ApplicationCore.Entities.MessageCommands;
+global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGuildDetails;
+global using FluentAssertions;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using System;
+global using System.Collections.Generic;
+global using System.Threading.Tasks;
+global using Xunit;
