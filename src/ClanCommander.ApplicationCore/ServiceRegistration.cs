@@ -1,4 +1,6 @@
-﻿namespace ClanCommander.ApplicationCore;
+﻿using System.Reflection;
+
+namespace ClanCommander.ApplicationCore;
 
 public static class ServiceRegistration
 {
@@ -11,7 +13,7 @@ public static class ServiceRegistration
         {
             options.Tokens.Add(configuration["ClashOfClans:Token"]);
         });
-
+        services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddTransient<ApplicationDbContextSeeder>();
 
         return services;
