@@ -1,21 +1,26 @@
-﻿namespace ClanCommander.DiscordBot.Services;
+﻿using ClanCommander.ApplicationCore.Interfaces;
+
+namespace ClanCommander.DiscordBot.Services;
 
 public class CommandHandler : DiscordClientService
 {
     private readonly IServiceProvider _provider;
     private readonly CommandService _commandService;
     private readonly IConfiguration _configuration;
+    private readonly IMessageCommandService _messageCommandService;
 
     public CommandHandler(
         DiscordSocketClient client,
         ILogger<CommandHandler> logger,
         IServiceProvider provider,
         CommandService commandService,
-        IConfiguration configuration) : base(client, logger)
+        IConfiguration configuration,
+        IMessageCommandService messageCommandService) : base(client, logger)
     {
         _provider = provider;
         _commandService = commandService;
         _configuration = configuration;
+        _messageCommandService = messageCommandService;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,7 +36,9 @@ public class CommandHandler : DiscordClientService
 
         int argPos = 0;
 
-        var executedWithPrefix = message.HasStringPrefix(_configuration["Prefix"], ref argPos);
+        var prefix = await _messageCommandService.GetGuildPrefixAsync((incomingMessage.Channel as SocketGuildChannel)?.Guild.Id);
+
+        var executedWithPrefix = message.HasStringPrefix(prefix, ref argPos);
         var executedWithBotMention = message.HasMentionPrefix(Client.CurrentUser, ref argPos);
 
         if (!executedWithPrefix && !executedWithBotMention) return;
