@@ -9,7 +9,7 @@ public class GetDiscordGuildDetailsQuery : IRequest<DiscordGuildDetailsDto>
         GuildId = guildId;
     }
 
-    public class GetDiscordGuildDetailsQueryHandler : IRequestHandler<GetDiscordGuildDetailsQuery, DiscordGuildDetailsDto?>
+    internal class GetDiscordGuildDetailsQueryHandler : IRequestHandler<GetDiscordGuildDetailsQuery, DiscordGuildDetailsDto?>
     {
         private readonly IDbConnection _db;
 

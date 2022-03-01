@@ -1,4 +1,6 @@
-﻿namespace ClanCommander.ApplicationCore.Features.Discord.Guilds;
+﻿using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeGuildMessageCommandsPrefix;
+
+namespace ClanCommander.ApplicationCore.Features.Discord.Guilds;
 
 public class GuildModule : ModuleBase<SocketCommandContext>
 {
@@ -32,6 +34,21 @@ public class GuildModule : ModuleBase<SocketCommandContext>
 
         embed.AddField("Owner", $"<@{Context.Guild.OwnerId}>");
         embed.AddField("User Count", Context.Guild.Users.Count);
+
+        await Context.Channel.SendMessageAsync(embed: embed.Build());
+    }
+
+    [Command("changeprefix")]
+    public async Task ChangePrefix(string newPrefix)
+    {
+        var bot = Context.Client.CurrentUser;
+
+        var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
+
+        var embed = new EmbedBuilder();
+        embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
+        embed.AddField("Old Prefix", response.OldPrefix);
+        embed.AddField("New Prefix", response.NewPrefix);
 
         await Context.Channel.SendMessageAsync(embed: embed.Build());
     }

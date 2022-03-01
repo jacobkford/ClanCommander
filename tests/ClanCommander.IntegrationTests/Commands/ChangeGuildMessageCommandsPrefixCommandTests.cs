@@ -1,6 +1,8 @@
-﻿namespace ClanCommander.IntegrationTests.Queries;
+﻿using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeGuildMessageCommandsPrefix;
 
-public class GetDiscordGuildDetailsQueryTests : TestBase
+namespace ClanCommander.IntegrationTests.Commands;
+
+public class ChangeGuildMessageCommandsPrefixCommandTests : TestBase
 {
     // Test Guild One is to test fully setup guilds
     private readonly DiscordGuildId _testGuildOneId = DiscordGuildId.FromUInt64(760910445686161488u);
@@ -16,7 +18,7 @@ public class GetDiscordGuildDetailsQueryTests : TestBase
     private readonly DiscordUserId _testGuildTwoOwner = DiscordUserId.FromUInt64(751887766404726806u);
     private readonly RegisteredDiscordGuild _testGuildTwo;
 
-    public GetDiscordGuildDetailsQueryTests() : base()
+    public ChangeGuildMessageCommandsPrefixCommandTests() : base()
     {
         _testGuildOne = new RegisteredDiscordGuild(_testGuildOneId, _testGuildOneName, _testGuildOneOwner);
         _testGuildCommands = new GuildMessageCommands(_testGuildOneId);
@@ -28,27 +30,29 @@ public class GetDiscordGuildDetailsQueryTests : TestBase
     }
 
     [Fact]
-    public async void ShouldReturnGuildWithMessageCommandsConfiguration()
+    public async void ShouldChangeGuildMessageCommandsPrefix_WhenPrefixHasPreviouslyBeenSetup()
     {
-        var result = await Mediator.Send(new GetDiscordGuildDetailsQuery(_testGuildOneId.Value));
+        var newPrefix = "$";
+
+        var result = await Mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(_testGuildOneId.Value, newPrefix));
 
         result.Should().NotBeNull();
-        result.Id.Should().Be(_testGuildOneId.Value);
-        result.Name.Should().Be(_testGuildOneName);
-        result.OwnerId.Should().Be(_testGuildOneOwner.Value);
-        result.MessageCommandPrefix.Should().Be(_testGuildOnePrefix);
+        result.GuildId.Should().Be(_testGuildOneId.Value);
+        result.OldPrefix.Should().Be(_testGuildOnePrefix);
+        result.NewPrefix.Should().Be(newPrefix);
     }
 
     [Fact]
-    public async void ShouldReturnGuild_WhenMessageCommandsPrefixNotCreated()
+    public async void ShouldCreateGuildMessageCommandAndChangePrefix_WhenGuildMessageCommandEntityDoesNotExist()
     {
-        var result = await Mediator.Send(new GetDiscordGuildDetailsQuery(_testGuildTwoId.Value));
+        var newPrefix = "£";
+
+        var result = await Mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(_testGuildTwoId.Value, newPrefix));
 
         result.Should().NotBeNull();
-        result.Id.Should().Be(_testGuildTwoId.Value);
-        result.Name.Should().Be(_testGuildTwoName);
-        result.OwnerId.Should().Be(_testGuildTwoOwner.Value);
-        result.MessageCommandPrefix.Should().BeNull();
+        result.GuildId.Should().Be(_testGuildTwoId.Value);
+        result.OldPrefix.Should().Be(GuildMessageCommands.DefaultMessageCommandPrefix);
+        result.NewPrefix.Should().Be(newPrefix);
     }
 
     private void SeedTestData()

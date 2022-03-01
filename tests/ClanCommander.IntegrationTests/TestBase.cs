@@ -1,4 +1,7 @@
+using ClanCommander.ApplicationCore.Interfaces;
+using ClanCommander.ApplicationCore.Services;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Reflection;
 
 namespace ClanCommander.IntegrationTests;
 
@@ -20,7 +23,7 @@ public abstract class TestBase : IDisposable
             {
                 services.AddLogging();
                 services.AddEntityFrameworkNpgsql();
-                services.AddMediatR(typeof(GetDiscordGuildDetailsQuery).Assembly);
+                services.AddMediatR(Assembly.Load("ClanCommander.ApplicationCore"));
                 services.BuildServiceProvider();
                 services.AddDbContext<ApplicationDbContext>(
                     options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
@@ -30,6 +33,8 @@ public abstract class TestBase : IDisposable
                     options.Configuration = Configuration.GetConnectionString("Redis");
                     options.InstanceName = $"{GetType().Name}:{Guid.NewGuid()}_";
                 });
+                services.AddTransient<ICacheService, CacheService>();
+                services.AddTransient<IMessageCommandService, MessageCommandService>();
             }).Build();
 
         ApplicationDbContext = host.Services.GetRequiredService<ApplicationDbContext>();
