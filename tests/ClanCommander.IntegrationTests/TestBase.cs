@@ -28,7 +28,7 @@ public abstract class TestBase : IDisposable
                 services.AddStackExchangeRedisCache(options =>
                 {
                     options.Configuration = Configuration.GetConnectionString("Redis");
-                    options.InstanceName = $"{GetType().Name}_{Guid.NewGuid()}_";
+                    options.InstanceName = $"{GetType().Name}:{Guid.NewGuid()}_";
                 });
             }).Build();
 

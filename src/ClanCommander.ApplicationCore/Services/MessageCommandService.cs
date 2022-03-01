@@ -18,7 +18,7 @@ internal class MessageCommandService : IMessageCommandService
             throw new ArgumentNullException(nameof(guildId));
         }
 
-        var cachePrefix = await _cacheService.GetAsync<string>($"guildPrefix_{guildId}");
+        var cachePrefix = await _cacheService.GetAsync<string>($"discord:guild:{guildId}:prefix");
 
         if (cachePrefix is not null)
         {
@@ -32,9 +32,9 @@ internal class MessageCommandService : IMessageCommandService
             new
             {
                 @GuildId = (decimal)guildId
-            })).SingleOrDefault() ?? "!";
+            })).SingleOrDefault() ?? GuildMessageCommands.DefaultMessageCommandPrefix;
 
-        await _cacheService.SetAsync($"guildPrefix_{guildId}", dbPrefix, TimeSpan.FromDays(30), TimeSpan.FromDays(2));
+        await _cacheService.SetAsync($"discord:guild:{guildId}:prefix", dbPrefix, TimeSpan.FromDays(30), TimeSpan.FromDays(2));
 
         return dbPrefix;
     }

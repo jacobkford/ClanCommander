@@ -36,7 +36,7 @@ public class MessageCommandServiceTests : TestBase
     [Fact]
     public async void ShouldReturnCacheGuildPrefixValue_WhenCacheValueExists()
     {
-        await _cacheService.SetAsync($"guildPrefix_{_testGuildOneId.Value}", "$");
+        await _cacheService.SetAsync($"discord:guild:{_testGuildOneId.Value}:prefix", "$");
 
         var result = await _messageCommandService.GetGuildPrefixAsync(_testGuildOneId.Value);
 
@@ -48,7 +48,7 @@ public class MessageCommandServiceTests : TestBase
     {
         var result = await _messageCommandService.GetGuildPrefixAsync(_testGuildTwoId.Value);
 
-        result.Should().Be("!");
+        result.Should().Be(GuildMessageCommands.DefaultMessageCommandPrefix);
     }
 
     private void SeedTestData()

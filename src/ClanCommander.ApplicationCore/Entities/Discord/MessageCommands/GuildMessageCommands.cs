@@ -6,6 +6,8 @@ internal class GuildMessageCommands : Entity, IAggregateRoot
 
     public string MessageCommandPrefix { get; private set; }
 
+    public const string DefaultMessageCommandPrefix = "!";
+
 
 #pragma warning disable CS8618
     // For EF Core
@@ -17,7 +19,7 @@ internal class GuildMessageCommands : Entity, IAggregateRoot
         Guard.Against.InvalidDiscordSnowflakeId(guildId.Value, nameof(guildId));
 
         GuildId = guildId;
-        MessageCommandPrefix = "!";
+        MessageCommandPrefix = DefaultMessageCommandPrefix;
     }
 
     public void ChangeMessageCommandPrefix(string newPrefix)
