@@ -19,7 +19,7 @@ try
                 MessageCacheSize = 200
             };
 
-            config.Token = context.Configuration["Token"];
+            config.Token = context.Configuration["Discord:BotToken"];
 
             //Use this to configure a custom format for Client/CommandService logging if needed. The default is below and should be suitable for Serilog usage
             config.LogFormat = (message, exception) => $"{message.Source}: {message.Message}";
