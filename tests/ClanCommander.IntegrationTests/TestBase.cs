@@ -1,11 +1,13 @@
+using Microsoft.Extensions.Caching.Distributed;
+
 namespace ClanCommander.IntegrationTests;
 
 public abstract class TestBase : IDisposable
 {
     internal readonly ApplicationDbContext ApplicationDbContext;
     protected readonly IConfigurationRoot Configuration;
-    private readonly IServiceScopeFactory ScopeFactory;
     protected readonly IMediator Mediator;
+    protected readonly IDistributedCache RedisCache;
 
     protected TestBase()
     {
@@ -22,11 +24,17 @@ public abstract class TestBase : IDisposable
                 services.BuildServiceProvider();
                 services.AddDbContext<ApplicationDbContext>(
                     options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
+
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = Configuration.GetConnectionString("Redis");
+                    options.InstanceName = $"{GetType().Name}_{Guid.NewGuid()}_";
+                });
             }).Build();
 
-        ScopeFactory = host.Services.GetRequiredService<IServiceScopeFactory>();
         ApplicationDbContext = host.Services.GetRequiredService<ApplicationDbContext>();
         Mediator = host.Services.GetRequiredService<IMediator>();
+        RedisCache = host.Services.GetRequiredService<IDistributedCache>();
 
         ApplicationDbContext.Database.Migrate();
         ApplicationDbContext.Database.EnsureCreated();
@@ -45,6 +53,7 @@ public abstract class TestBase : IDisposable
         var configData = new Dictionary<string, string>
         {
             { "ConnectionStrings:PostgreSQL", connectionString },
+            { "ConnectionStrings:Redis", "127.0.0.1:6379" }
         };
 
         return new ConfigurationBuilder()
