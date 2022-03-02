@@ -31,12 +31,12 @@ public class GuildHandler : DiscordClientService
 
     private Task HandleJoinedGuild(SocketGuild guild)
     {
-        throw new NotImplementedException();
+        return _mediator.Publish(new JoinedDiscordGuildClientEvent(guild.Id, guild.Name, guild.OwnerId));
     }
 
     private Task HandleLeftGuild(SocketGuild guild)
     {
-        throw new NotImplementedException();
+        return _mediator.Publish(new LeftDiscordGuildClientEvent(guild.Id));
     }
 
 
