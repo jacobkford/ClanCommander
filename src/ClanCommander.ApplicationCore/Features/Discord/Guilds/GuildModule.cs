@@ -44,18 +44,65 @@ public class GuildModule : ModuleBase<SocketCommandContext>
     public class GuildPrefixModule: ModuleBase<SocketCommandContext>
     {
         private readonly IMediator _mediator;
+        private readonly IMessageCommandService _messageCommandService;
 
-        public GuildPrefixModule(IMediator mediator)
+        public GuildPrefixModule(IMediator mediator, IMessageCommandService messageCommandService)
         {
             _mediator = mediator;
+            _messageCommandService = messageCommandService;
         }
 
-        [Command("change"), Alias("set")]
+        [Command, Alias("get")]
+        public async Task GetPrefixAsync()
+        {
+            var prefix = await _messageCommandService.GetGuildPrefixAsync(Context.Guild.Id);
+
+            var embed = new EmbedBuilder()
+                .WithTitle($"Command Prefix is set to `{prefix}` for this server")
+                .WithDescription($"*Example:* `{prefix}help`")
+                .WithCurrentTimestamp()
+                .WithFooter($"Executed by {Context.User.Username}#{Context.User.DiscriminatorValue}", Context.User.GetAvatarUrl() ?? Context.User.GetDefaultAvatarUrl());
+
+            await Context.Channel.SendMessageAsync(embed: embed.Build());
+        }
+
+        [Command, Alias("get")]
+        [RequireOwner]
+        public async Task GetGuildPrefixAsync(ulong guildId)
+        {
+            var prefix = await _messageCommandService.GetGuildPrefixAsync(guildId);
+
+            var embed = new EmbedBuilder()
+                .WithTitle($"Command Prefix is set to `{prefix}` for this server")
+                .WithDescription($"*Example:* `{prefix}help`")
+                .WithCurrentTimestamp()
+                .WithFooter($"Executed by {Context.User.Username}#{Context.User.DiscriminatorValue}", Context.User.GetAvatarUrl() ?? Context.User.GetDefaultAvatarUrl());
+
+            await Context.Channel.SendMessageAsync(embed: embed.Build());
+        }
+
+        [Command("change"), Alias("set", "update")]
         public async Task ChangePrefix(string newPrefix)
         {
             var bot = Context.Client.CurrentUser;
 
             var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
+
+            var embed = new EmbedBuilder();
+            embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
+            embed.AddField("Old Prefix", response.OldPrefix);
+            embed.AddField("New Prefix", response.NewPrefix);
+
+            await Context.Channel.SendMessageAsync(embed: embed.Build());
+        }
+
+        [Command("change"), Alias("set", "update")]
+        [RequireOwner]
+        public async Task ChangePrefix(ulong guildId, string newPrefix)
+        {
+            var bot = Context.Client.CurrentUser;
+
+            var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(guildId, newPrefix));
 
             var embed = new EmbedBuilder();
             embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
