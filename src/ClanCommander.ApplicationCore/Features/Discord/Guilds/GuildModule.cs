@@ -2,6 +2,8 @@
 
 namespace ClanCommander.ApplicationCore.Features.Discord.Guilds;
 
+[Group("guild"), Alias("server")]
+[RequireContext(ContextType.Guild)]
 public class GuildModule : ModuleBase<SocketCommandContext>
 {
     private readonly IMediator _mediator;
@@ -11,7 +13,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         _mediator = mediator;
     }
 
-    [Command("guild")]
+    [Command, Alias("info")]
     public async Task GuildAsync()
     {
         var bot = Context.Client.CurrentUser;
@@ -38,18 +40,29 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         await Context.Channel.SendMessageAsync(embed: embed.Build());
     }
 
-    [Command("changeprefix")]
-    public async Task ChangePrefix(string newPrefix)
+    [Group("prefix")]
+    public class GuildPrefixModule: ModuleBase<SocketCommandContext>
     {
-        var bot = Context.Client.CurrentUser;
+        private readonly IMediator _mediator;
 
-        var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
+        public GuildPrefixModule(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-        var embed = new EmbedBuilder();
-        embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
-        embed.AddField("Old Prefix", response.OldPrefix);
-        embed.AddField("New Prefix", response.NewPrefix);
+        [Command("change"), Alias("set")]
+        public async Task ChangePrefix(string newPrefix)
+        {
+            var bot = Context.Client.CurrentUser;
 
-        await Context.Channel.SendMessageAsync(embed: embed.Build());
+            var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
+
+            var embed = new EmbedBuilder();
+            embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
+            embed.AddField("Old Prefix", response.OldPrefix);
+            embed.AddField("New Prefix", response.NewPrefix);
+
+            await Context.Channel.SendMessageAsync(embed: embed.Build());
+        }
     }
 }
