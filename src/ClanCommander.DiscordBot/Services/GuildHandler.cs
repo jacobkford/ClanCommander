@@ -1,16 +1,34 @@
-﻿/*namespace ClanCommander.DiscordBot.Services;
+﻿using ClanCommander.ApplicationCore.Features.Discord.Guilds.ClientEvents;
+using MediatR;
+
+namespace ClanCommander.DiscordBot.Services;
 
 public class GuildHandler : DiscordClientService
 {
-    public GuildHandler(DiscordSocketClient client, ILogger<DiscordClientService> logger) : base(client, logger)
+    private readonly IMediator _mediator;
+
+    public GuildHandler(DiscordSocketClient client, ILogger<DiscordClientService> logger, IMediator mediator) : base(client, logger)
     {
+        _mediator = mediator;
     }
 
-    protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         Client.JoinedGuild += HandleJoinedGuild;
         Client.LeftGuild += HandleLeftGuild;
+        Client.GuildUpdated += HandleUpdatedGuild;
     }
+
+    private Task HandleUpdatedGuild(SocketGuild beforeGuild, SocketGuild afterGuild)
+    {
+        return _mediator.Publish(new DiscordGuildUpdatedClientEvent(
+                       beforeGuild.Id,
+                       beforeGuild.Name,
+                       afterGuild.Name,
+                       beforeGuild.OwnerId,
+                       afterGuild.OwnerId));
+    }
+
     private Task HandleJoinedGuild(SocketGuild guild)
     {
         throw new NotImplementedException();
@@ -21,5 +39,5 @@ public class GuildHandler : DiscordClientService
         throw new NotImplementedException();
     }
 
-    
-}*/
+
+}

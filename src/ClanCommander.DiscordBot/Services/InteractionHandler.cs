@@ -36,7 +36,7 @@ public class InteractionHandler : DiscordClientService
 
         // If DOTNET_ENVIRONMENT is set to development, only register the commands to a single guild
         if (_environment.IsDevelopment())
-            await _interactionService.RegisterCommandsToGuildAsync(_configuration.GetValue<ulong>("DevGuild"));
+            await _interactionService.RegisterCommandsToGuildAsync(_configuration.GetValue<ulong>("Discord:DevGuildId"));
         else
             await _interactionService.RegisterCommandsGloballyAsync();
     }
