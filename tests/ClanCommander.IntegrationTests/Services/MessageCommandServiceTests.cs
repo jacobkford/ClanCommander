@@ -1,60 +1,55 @@
-﻿using ClanCommander.ApplicationCore.Services;
-
-namespace ClanCommander.IntegrationTests.Services;
+﻿namespace ClanCommander.IntegrationTests.Services;
 
 public class MessageCommandServiceTests : TestBase
 {
     private readonly CacheService _cacheService;
     private readonly MessageCommandService _messageCommandService;
 
-    private readonly DiscordGuildId _testGuildOneId = DiscordGuildId.FromUInt64(760910445686161488u);
-    private readonly string _testGuildOnePrefix = "?";
-
-    private readonly DiscordGuildId _testGuildTwoId = DiscordGuildId.FromUInt64(834837883810349098u);
-
-    private readonly GuildMessageCommands _testGuildOneCommands;
-
-    public MessageCommandServiceTests() : base()
+    public MessageCommandServiceTests() 
+        : base()
     {
         _cacheService = new CacheService(RedisCache);
         _messageCommandService = new MessageCommandService(Configuration, _cacheService);
-
-        _testGuildOneCommands = new GuildMessageCommands(_testGuildOneId);
-        _testGuildOneCommands.ChangeMessageCommandPrefix(_testGuildOnePrefix);
-
-        SeedTestData();
     }
 
     [Fact]
     public async void ShouldReturnDatabaseGuildPrefixValue_WhenDatabaseEntityExists()
     {
-        var result = await _messageCommandService.GetGuildPrefixAsync(_testGuildOneId.Value);
+        // Arrange
+        var mock = new ValidRegisteredDiscordGuildMock();
+        await mock.SeedToDatabaseAsync(ServiceProvider);
 
-        result.Should().Be(_testGuildOnePrefix);
+        // Act
+        var result = await _messageCommandService.GetGuildPrefixAsync(mock.GuildId.Value);
+
+        // Assert
+        result.Should().Be(mock.GuildPrefix);
     }
 
     [Fact]
     public async void ShouldReturnCacheGuildPrefixValue_WhenCacheValueExists()
     {
-        await _cacheService.SetAsync($"discord:guild:{_testGuildOneId.Value}:prefix", "$");
+        // Arrange
+        var guildId = 834837883810349098u;
+        await _cacheService.SetAsync($"discord:guild:{guildId}:prefix", "$");
 
-        var result = await _messageCommandService.GetGuildPrefixAsync(_testGuildOneId.Value);
+        // Act
+        var result = await _messageCommandService.GetGuildPrefixAsync(guildId);
 
+        // Assert
         result.Should().Be("$");
     }
 
     [Fact]
     public async void ShouldReturnDefaultGuildPrefixValue_WhenCacheAndDatabaseValueDoesNotExist()
     {
-        var result = await _messageCommandService.GetGuildPrefixAsync(_testGuildTwoId.Value);
+        // Arrange
+        var guildId = 870307653321117746u;
 
+        // Act
+        var result = await _messageCommandService.GetGuildPrefixAsync(guildId);
+
+        // Assert
         result.Should().Be(GuildMessageCommands.DefaultMessageCommandPrefix);
-    }
-
-    private void SeedTestData()
-    {
-        ApplicationDbContext.DiscordGuilds.Add(new RegisteredDiscordGuild(_testGuildOneId, "test", DiscordUserId.FromUInt64(339924145909399562u)));
-        ApplicationDbContext.MessageCommandsConfigurations.Add(_testGuildOneCommands);
-        ApplicationDbContext.SaveChanges();
     }
 }

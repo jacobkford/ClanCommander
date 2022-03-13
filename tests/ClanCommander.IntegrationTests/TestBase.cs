@@ -1,14 +1,9 @@
-using ClanCommander.ApplicationCore.Interfaces;
-using ClanCommander.ApplicationCore.Services;
-using Microsoft.Extensions.Caching.Distributed;
-using System.Reflection;
-
 namespace ClanCommander.IntegrationTests;
 
 public abstract class TestBase : IDisposable
 {
-    internal readonly ApplicationDbContext ApplicationDbContext;
     protected readonly IConfigurationRoot Configuration;
+    protected readonly IServiceProvider ServiceProvider;
     protected readonly IMediator Mediator;
     protected readonly IDistributedCache RedisCache;
 
@@ -35,19 +30,34 @@ public abstract class TestBase : IDisposable
                 });
                 services.AddTransient<ICacheService, CacheService>();
                 services.AddTransient<IMessageCommandService, MessageCommandService>();
+                services.AddTransient<IClashOfClansApiClanService, TestClashOfClansApiClanService>();
             }).Build();
 
-        ApplicationDbContext = host.Services.GetRequiredService<ApplicationDbContext>();
+        ServiceProvider = host.Services;
         Mediator = host.Services.GetRequiredService<IMediator>();
         RedisCache = host.Services.GetRequiredService<IDistributedCache>();
 
-        ApplicationDbContext.Database.Migrate();
-        ApplicationDbContext.Database.EnsureCreated();
+        var dbContext = host.Services.GetRequiredService<ApplicationDbContext>();
+
+        dbContext.Database.Migrate();
+        dbContext.Database.EnsureCreated();
+    }
+
+    public void Setup()
+    {
+        using var scope = ServiceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        context.Database.Migrate();
+        context.Database.EnsureCreated();
     }
 
     public void Dispose()
     {
-        ApplicationDbContext.Database.EnsureDeleted();
+        using var scope = ServiceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        context.Database.EnsureDeleted();
     }
 
     private IConfigurationRoot SetupConfigurationRoot()

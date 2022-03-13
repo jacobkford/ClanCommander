@@ -39,7 +39,7 @@ public class UserJoinedGuildClientEvent : INotification
                 return;
 
             await using var scope = _serviceProvider.CreateAsyncScope();
-            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>()
                 ?? throw new NullReferenceException();
 
             var user = new DiscordUser(DiscordUserId.FromUInt64(notification.UserId), notification.Username);
