@@ -32,7 +32,8 @@ public class DiscordGuildUpdatedClientEvent : INotification
             var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>() 
                 ?? throw new NullReferenceException();
 
-            var guild = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(notification.GuildId));
+            var guild = await dbContext.DiscordGuilds.SingleOrDefaultAsync(
+                x => x.GuildId == DiscordGuildId.FromUInt64(notification.GuildId), cancellationToken);
 
             if (guild is null)
             {
@@ -40,6 +41,9 @@ public class DiscordGuildUpdatedClientEvent : INotification
                     DiscordGuildId.FromUInt64(notification.GuildId), 
                     notification.BeforeName, 
                     DiscordUserId.FromUInt64(notification.BeforeOwnerId));
+
+                await dbContext.AddAsync(guild, cancellationToken);
+                await dbContext.SaveChangesAsync(cancellationToken);
             }
 
             if (!notification.BeforeName.Equals(notification.AfterName))
@@ -52,7 +56,7 @@ public class DiscordGuildUpdatedClientEvent : INotification
                 guild.ChangeOwner(DiscordUserId.FromUInt64(notification.AfterOwnerId));
             }
 
-            await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }
