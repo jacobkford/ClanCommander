@@ -23,7 +23,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
 
         var data = await _mediator.Send(new GetDiscordGuildDetailsQuery(Context.Guild.Id));
 
-        var embed = new EmbedBuilder();
+        var embed = new GeneralEmbedBuilder();
         embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
 
         if (data is null)

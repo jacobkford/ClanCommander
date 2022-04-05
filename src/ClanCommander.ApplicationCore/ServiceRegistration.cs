@@ -15,14 +15,11 @@ public static class ServiceRegistration
             options.InstanceName = "ClanCommander_";
         });
 
-        services.AddClashOfClans(options =>
-        {
-            options.Tokens.Add(configuration["ClashOfClans:Token"]);
-        });
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddTransient<ApplicationDbContextSeeder>();
-        services.AddTransient<ICacheService, CacheService>();
+        services.AddTransient<ICacheService, RedisCacheService>();
         services.AddTransient<IMessageCommandService, MessageCommandService>();
+        services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanService>();
 
         return services;
     }

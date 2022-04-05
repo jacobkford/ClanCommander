@@ -2,13 +2,13 @@
 
 public class MessageCommandServiceTests : TestBase
 {
-    private readonly CacheService _cacheService;
+    private readonly RedisCacheService _cacheService;
     private readonly MessageCommandService _messageCommandService;
 
     public MessageCommandServiceTests() 
         : base()
     {
-        _cacheService = new CacheService(RedisCache);
+        _cacheService = new RedisCacheService(RedisCache);
         _messageCommandService = new MessageCommandService(Configuration, _cacheService);
     }
 

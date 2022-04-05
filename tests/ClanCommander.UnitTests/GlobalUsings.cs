@@ -12,7 +12,7 @@ global using ClanCommander.ApplicationCore.Entities.Discord.Users.Events;
 global using ClanCommander.ApplicationCore.Entities.MessageCommands;
 global using ClanCommander.ApplicationCore.Entities.Shared;
 global using ClanCommander.ApplicationCore.Extensions;
-global using ClanCommander.SharedKernal.Interfaces;
+global using ClanCommander.SharedKernel.Interfaces;
 global using ClanCommander.SharedKernel.Models;
 global using FluentAssertions;
 global using System;

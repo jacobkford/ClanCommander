@@ -1,10 +1,10 @@
 ﻿namespace ClanCommander.ApplicationCore.Services;
 
-internal class CacheService : ICacheService
+internal class RedisCacheService : ICacheService
 {
     private readonly IDistributedCache _cache;
 
-    public CacheService(IDistributedCache cache)
+    public RedisCacheService(IDistributedCache cache)
     {
         _cache = cache;
     }
@@ -20,11 +20,14 @@ internal class CacheService : ICacheService
 
         return JsonSerializer.Deserialize<T>(jsonData);
     }
+
     public async Task SetAsync<T>(string key, T value, TimeSpan? absoluteExpireTime = null, TimeSpan? unusedExpireTime = null)
     {
-        var options = new DistributedCacheEntryOptions();
-        options.AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromSeconds(60);
-        options.SlidingExpiration = unusedExpireTime;
+        var options = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = absoluteExpireTime ?? TimeSpan.FromSeconds(60),
+            SlidingExpiration = unusedExpireTime
+        };
 
         var jsonData = JsonSerializer.Serialize(value);
 

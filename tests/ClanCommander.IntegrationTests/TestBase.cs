@@ -28,7 +28,7 @@ public abstract class TestBase : IDisposable
                     options.Configuration = Configuration.GetConnectionString("Redis");
                     options.InstanceName = $"{GetType().Name}:{Guid.NewGuid()}_";
                 });
-                services.AddTransient<ICacheService, CacheService>();
+                services.AddTransient<ICacheService, RedisCacheService>();
                 services.AddTransient<IMessageCommandService, MessageCommandService>();
                 services.AddTransient<IClashOfClansApiClanService, TestClashOfClansApiClanService>();
             }).Build();
@@ -43,13 +43,13 @@ public abstract class TestBase : IDisposable
         dbContext.Database.EnsureCreated();
     }
 
-    public void Setup()
+    public async Task Setup()
     {
-        using var scope = ServiceProvider.CreateScope();
+        await using var scope = ServiceProvider.CreateAsyncScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        context.Database.Migrate();
-        context.Database.EnsureCreated();
+        await context.Database.MigrateAsync();
+        await context.Database.EnsureCreatedAsync();
     }
 
     public void Dispose()
