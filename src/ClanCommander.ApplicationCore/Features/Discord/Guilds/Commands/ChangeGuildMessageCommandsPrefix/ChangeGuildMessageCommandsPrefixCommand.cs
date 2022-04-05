@@ -25,7 +25,8 @@ public class ChangeGuildMessageCommandsPrefixCommand : IRequest<ChangeGuildMessa
         public async Task<ChangeGuildMessageCommandsPrefixDto> Handle(ChangeGuildMessageCommandsPrefixCommand request, CancellationToken cancellationToken)
         {
             await using var scope = _serviceProvider.CreateAsyncScope();
-            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
+                ?? throw new NullReferenceException();
 
             var guildMessageCommandsConfig = await dbContext.MessageCommandsConfigurations
                 .SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(request.GuildId));
