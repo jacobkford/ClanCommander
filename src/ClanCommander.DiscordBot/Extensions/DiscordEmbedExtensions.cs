@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Extensions;
+﻿namespace ClanCommander.DiscordBot.Extensions;
 
 public static class DiscordEmbedExtensions
 {

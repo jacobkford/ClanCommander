@@ -27,7 +27,7 @@ public class CommandHandler : DiscordClientService
     {
         Client.MessageReceived += HandleMessage;
         _commandService.CommandExecuted += CommandExecutedAsync;
-        await _commandService.AddModulesAsync(Assembly.Load("ClanCommander.ApplicationCore"), _provider);
+        await _commandService.AddModulesAsync(Assembly.GetExecutingAssembly(), _provider);
     }
     private async Task HandleMessage(SocketMessage incomingMessage)
     {
@@ -55,7 +55,12 @@ public class CommandHandler : DiscordClientService
         if (!command.IsSpecified || result.IsSuccess)
             return;
 
-        await context.Channel.SendMessageAsync($"Error: {result}");
+        var errorEmbed = new ErrorEmbedBuilder()
+            .WithTitle($"❌ Error: {result.ErrorReason}")
+            .WithFooter($"Executed by {context.User.Username}#{context.User.DiscriminatorValue}", context.User.GetAvatarUrl() ?? context.User.GetDefaultAvatarUrl())
+            .WithCurrentTimestamp();
+
+        await context.Channel.SendMessageAsync(embed: errorEmbed.Build());
     } 
 }
 

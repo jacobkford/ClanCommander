@@ -1,6 +1,9 @@
-﻿using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeGuildMessageCommandsPrefix;
+﻿using ContextType = Discord.Commands.ContextType;
+using GroupAttribute = Discord.Commands.GroupAttribute;
+using RequireContextAttribute = Discord.Commands.RequireContextAttribute;
+using RequireOwnerAttribute = Discord.Commands.RequireOwnerAttribute;
 
-namespace ClanCommander.ApplicationCore.Features.Discord.Guilds;
+namespace ClanCommander.DiscordBot.Modules;
 
 [Group("guild"), Alias("server")]
 [RequireContext(ContextType.Guild)]
@@ -41,7 +44,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
     }
 
     [Group("prefix")]
-    public class GuildPrefixModule: ModuleBase<SocketCommandContext>
+    public class GuildPrefixModule : ModuleBase<SocketCommandContext>
     {
         private readonly IMediator _mediator;
         private readonly IMessageCommandService _messageCommandService;
@@ -57,7 +60,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         {
             var prefix = await _messageCommandService.GetGuildPrefixAsync(Context.Guild.Id);
 
-            var embed = new EmbedBuilder()
+            var embed = new GeneralEmbedBuilder()
                 .WithTitle($"Command Prefix is set to `{prefix}` for this server")
                 .WithDescription($"*Example:* `{prefix}help`")
                 .WithCurrentTimestamp()
@@ -72,7 +75,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         {
             var prefix = await _messageCommandService.GetGuildPrefixAsync(guildId);
 
-            var embed = new EmbedBuilder()
+            var embed = new GeneralEmbedBuilder()
                 .WithTitle($"Command Prefix is set to `{prefix}` for this server")
                 .WithDescription($"*Example:* `{prefix}help`")
                 .WithCurrentTimestamp()
@@ -88,7 +91,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
 
             var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
 
-            var embed = new EmbedBuilder();
+            var embed = new SuccessEmbedBuilder();
             embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
             embed.AddField("Old Prefix", response.OldPrefix);
             embed.AddField("New Prefix", response.NewPrefix);
@@ -104,7 +107,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
 
             var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(guildId, newPrefix));
 
-            var embed = new EmbedBuilder();
+            var embed = new SuccessEmbedBuilder();
             embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
             embed.AddField("Old Prefix", response.OldPrefix);
             embed.AddField("New Prefix", response.NewPrefix);

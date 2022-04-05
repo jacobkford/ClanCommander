@@ -1,6 +1,6 @@
-﻿namespace ClanCommander.ApplicationCore.Features.Misc;
+﻿namespace ClanCommander.DiscordBot.Modules;
 
-public class MiscCommands : ModuleBase<SocketCommandContext>
+public class MiscModule : ModuleBase<SocketCommandContext>
 {
     [Command("ping")]
     public async Task PingAsync()
