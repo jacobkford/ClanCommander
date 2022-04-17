@@ -26,6 +26,7 @@ public static class ServiceRegistration
         services.AddTransient<ICacheService, RedisCacheService>();
         services.AddTransient<IMessageCommandService, MessageCommandService>();
         services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanService>();
+        services.AddTransient<IClashOfClansApiPlayerService, ClashOfClansApiPlayerService>();
 
         return services;
     }
