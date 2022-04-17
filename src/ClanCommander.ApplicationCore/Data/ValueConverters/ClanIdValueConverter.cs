@@ -9,3 +9,17 @@ internal class ClanIdValueConverter : ValueConverter<ClanId, string>
         : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
     { }
 }
+
+internal class ClanIdTypeHandler : SqlMapper.TypeHandler<ClanId>
+{
+    public override ClanId Parse(object value)
+    {
+        return ClanId.FromString((string)value);
+    }
+
+    public override void SetValue(IDbDataParameter parameter, ClanId value)
+    {
+        parameter.DbType = DbType.String;
+        parameter.Value = value.Value;
+    }
+}

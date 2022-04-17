@@ -9,3 +9,17 @@ internal class DiscordGuildIdValueConverter : ValueConverter<DiscordGuildId, ulo
         : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) 
     { }
 }
+
+internal class DiscordGuildIdTypeHandler : SqlMapper.TypeHandler<DiscordGuildId>
+{
+    public override DiscordGuildId Parse(object value)
+    {
+        return DiscordGuildId.Parse(value.ToString() ?? "");
+    }
+
+    public override void SetValue(IDbDataParameter parameter, DiscordGuildId value)
+    {
+        parameter.DbType = DbType.Int64;
+        parameter.Value = value.Value;
+    }
+}
