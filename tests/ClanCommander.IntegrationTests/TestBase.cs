@@ -41,6 +41,7 @@ public abstract class TestBase : IDisposable
                 services.AddTransient<ICacheService, RedisCacheService>();
                 services.AddTransient<IMessageCommandService, MessageCommandService>();
                 services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanServiceMock>();
+                services.AddTransient<IClashOfClansApiPlayerService, ClashOfClansApiPlayerServiceMock>();
             }).Build();
 
         ServiceProvider = host.Services;
