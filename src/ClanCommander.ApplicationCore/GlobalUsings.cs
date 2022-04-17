@@ -17,16 +17,12 @@ global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Inte
 global using ClanCommander.ApplicationCore.Entities.MessageCommands;
 global using ClanCommander.ApplicationCore.Entities.Shared;
 global using ClanCommander.ApplicationCore.Extensions;
-global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGuildDetails;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.Shared;
 global using ClanCommander.ApplicationCore.Interfaces;
 global using ClanCommander.ApplicationCore.Services;
 global using ClanCommander.SharedKernel.Interfaces;
-global using ClanCommander.SharedKernel.DiscordEmbedBuilders;
 global using ClanCommander.SharedKernel.Models;
 global using Dapper;
-global using Discord;
-global using Discord.Commands;
-global using Discord.WebSocket;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Design;
