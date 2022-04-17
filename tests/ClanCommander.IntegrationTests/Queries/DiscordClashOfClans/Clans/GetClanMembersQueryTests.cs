@@ -2,7 +2,7 @@
 
 namespace ClanCommander.IntegrationTests.Queries.DiscordClashOfClans.Clans;
 
-public class GetClanRosterQueryTests : TestBase
+public class GetClanMembersQueryTests : TestBase
 {
     [Fact]
     public async void ShouldReturnClanRoster_WithDiscordData_WhenClanIsRegisteredToADiscordGuild()
@@ -21,7 +21,7 @@ public class GetClanRosterQueryTests : TestBase
         await clanMock.SeedToDatabaseAsync(ServiceProvider);
 
         // Act
-        var result = await Mediator.Send(new GetClanRosterQuery(clanMock.ClanId.Value, clanMock.GuildId.Value));
+        var result = await Mediator.Send(new GetClanMembersQuery(clanMock.ClanId.Value, clanMock.GuildId.Value));
 
         // Assert
         result.Should().NotBeNull();
@@ -37,7 +37,7 @@ public class GetClanRosterQueryTests : TestBase
         var clanId = "#9UGQ0GL";
 
         // Act
-        var result = await Mediator.Send(new GetClanRosterQuery(clanId, default));
+        var result = await Mediator.Send(new GetClanMembersQuery(clanId, default));
 
         // Assert
         result.Should().NotBeNull();

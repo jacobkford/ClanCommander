@@ -1,17 +1,17 @@
 ﻿namespace ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanRoster;
 
-public class GetClanRosterQuery : IRequest<GetClanRosterDto>
+public class GetClanMembersQuery : IRequest<GetClanMembersDto>
 {
     public string ClanId { get; private set; }
     public ulong GuildId { get; private set; }
 
-    public GetClanRosterQuery(string clanId, ulong guildId)
+    public GetClanMembersQuery(string clanId, ulong guildId)
     {
         ClanId = clanId.ToUpper();
         GuildId = guildId;
     }
 
-    internal class GetClanRosterQueryHandler : IRequestHandler<GetClanRosterQuery, GetClanRosterDto?>
+    internal class GetClanRosterQueryHandler : IRequestHandler<GetClanMembersQuery, GetClanMembersDto?>
     {
         private readonly IDbConnection _db;
         private readonly IClashOfClansApiClanService _clanApiService;
@@ -23,7 +23,7 @@ public class GetClanRosterQuery : IRequest<GetClanRosterDto>
         }
 
         // TODO: SQL query & object mapping needs refactoring
-        public async Task<GetClanRosterDto?> Handle(GetClanRosterQuery request, CancellationToken cancellationToken)
+        public async Task<GetClanMembersDto?> Handle(GetClanMembersQuery request, CancellationToken cancellationToken)
         {
             var clanData = await _clanApiService.GetClanAsync(request.ClanId);
             if (clanData is null)
@@ -31,7 +31,7 @@ public class GetClanRosterQuery : IRequest<GetClanRosterDto>
                 throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
             }
 
-            var data = new GetClanRosterDto
+            var data = new GetClanMembersDto
             {
                 ClanId = clanData!.Tag,
                 ClanName = clanData.Name,
