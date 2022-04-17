@@ -1,6 +1,6 @@
-﻿namespace ClanCommander.IntegrationTests.Shared;
+﻿namespace ClanCommander.IntegrationTests.Mocks;
 
-public class TestClashOfClansApiClanService : IClashOfClansApiClanService
+public class ClashOfClansApiClanServiceMock : IClashOfClansApiClanService
 {
     public Task<ClashOfClans.Models.Clan?> GetClanAsync(string id)
     {

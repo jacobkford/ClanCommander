@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.IntegrationTests.SeedData;
+﻿namespace ClanCommander.IntegrationTests.Mocks;
 
 public class ValidRegisteredDiscordGuildMock
 {

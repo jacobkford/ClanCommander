@@ -11,8 +11,7 @@ global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Qu
 global using ClanCommander.ApplicationCore.Features.Discord.Users.ClientEvents;
 global using ClanCommander.ApplicationCore.Interfaces;
 global using ClanCommander.ApplicationCore.Services;
-global using ClanCommander.IntegrationTests.SeedData;
-global using ClanCommander.IntegrationTests.Shared;
+global using ClanCommander.IntegrationTests.Mocks;
 global using FluentAssertions;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;

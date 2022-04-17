@@ -1,3 +1,6 @@
+using ClanCommander.ApplicationCore.Data.ValueConverters;
+using Dapper;
+
 namespace ClanCommander.IntegrationTests;
 
 public abstract class TestBase : IDisposable
@@ -28,9 +31,16 @@ public abstract class TestBase : IDisposable
                     options.Configuration = Configuration.GetConnectionString("Redis");
                     options.InstanceName = $"{GetType().Name}:{Guid.NewGuid()}_";
                 });
+
+                SqlMapper.AddTypeHandler(new ClanIdTypeHandler());
+                SqlMapper.AddTypeHandler(new DiscordGuildIdTypeHandler());
+                SqlMapper.AddTypeHandler(new DiscordUserIdTypeHandler());
+                SqlMapper.AddTypeHandler(new PlayerIdTypeHandler());
+                SqlMapper.AddTypeHandler(new ClanMemberRoleTypeHandler());
+
                 services.AddTransient<ICacheService, RedisCacheService>();
                 services.AddTransient<IMessageCommandService, MessageCommandService>();
-                services.AddTransient<IClashOfClansApiClanService, TestClashOfClansApiClanService>();
+                services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanServiceMock>();
             }).Build();
 
         ServiceProvider = host.Services;
