@@ -15,6 +15,12 @@ public static class ServiceRegistration
             options.InstanceName = "ClanCommander_";
         });
 
+        SqlMapper.AddTypeHandler(new ClanIdTypeHandler());
+        SqlMapper.AddTypeHandler(new DiscordGuildIdTypeHandler());
+        SqlMapper.AddTypeHandler(new DiscordUserIdTypeHandler());
+        SqlMapper.AddTypeHandler(new PlayerIdTypeHandler());
+        SqlMapper.AddTypeHandler(new ClanMemberRoleTypeHandler());
+
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddTransient<ApplicationDbContextSeeder>();
         services.AddTransient<ICacheService, RedisCacheService>();
