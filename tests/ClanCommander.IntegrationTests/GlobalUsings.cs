@@ -25,3 +25,4 @@ global using System.Linq;
 global using System.Reflection;
 global using System.Threading.Tasks;
 global using Xunit;
+global using static FluentAssertions.FluentActions;
