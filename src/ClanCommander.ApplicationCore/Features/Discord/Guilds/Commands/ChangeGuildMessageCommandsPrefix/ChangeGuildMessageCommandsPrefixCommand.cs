@@ -31,11 +31,8 @@ public class ChangeGuildMessageCommandsPrefixCommand : IRequest<ChangeGuildMessa
             var guildMessageCommandsConfig = await dbContext.MessageCommandsConfigurations
                 .SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(request.GuildId));
 
-            if (guildMessageCommandsConfig is null)
-            {
-                guildMessageCommandsConfig = new GuildMessageCommands(DiscordGuildId.FromUInt64(request.GuildId));
-            }
-
+            guildMessageCommandsConfig ??= new GuildMessageCommands(DiscordGuildId.FromUInt64(request.GuildId));
+            
             var oldPrefix = guildMessageCommandsConfig.MessageCommandPrefix;
 
             guildMessageCommandsConfig.ChangeMessageCommandPrefix(request.Prefix);
