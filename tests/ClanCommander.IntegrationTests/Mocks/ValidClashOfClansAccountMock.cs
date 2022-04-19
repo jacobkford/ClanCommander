@@ -1,6 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Users;
-
-namespace ClanCommander.IntegrationTests.Mocks;
+﻿namespace ClanCommander.IntegrationTests.Mocks;
 
 public class ValidClashOfClansAccountMock
 {

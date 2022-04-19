@@ -20,7 +20,6 @@ public class GetClanRosterCompositionQuery : IRequest<GetClanRosterCompositionDt
         {
             _clanApiService = clanApiService;
             _playerApiService = playerApiService;
-
         }
 
         public async Task<GetClanRosterCompositionDto?> Handle(GetClanRosterCompositionQuery request, CancellationToken cancellationToken)

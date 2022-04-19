@@ -2,9 +2,6 @@
 
 public class ChangeGuildMessageCommandsPrefixCommandTests : TestBase
 {
-    public ChangeGuildMessageCommandsPrefixCommandTests() 
-        : base() { }
-
     [Fact]
     public async void ShouldChangeGuildMessageCommandsPrefix_WhenPrefixHasPreviouslyBeenSetup()
     {

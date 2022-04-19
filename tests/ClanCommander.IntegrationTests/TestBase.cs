@@ -1,6 +1,3 @@
-using ClanCommander.ApplicationCore.Data.ValueConverters;
-using Dapper;
-
 namespace ClanCommander.IntegrationTests;
 
 public abstract class TestBase : IDisposable
@@ -54,21 +51,13 @@ public abstract class TestBase : IDisposable
         dbContext.Database.EnsureCreated();
     }
 
-    public async Task Setup()
-    {
-        await using var scope = ServiceProvider.CreateAsyncScope();
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        await context.Database.MigrateAsync();
-        await context.Database.EnsureCreatedAsync();
-    }
-
     public void Dispose()
     {
         using var scope = ServiceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
         context.Database.EnsureDeleted();
+        GC.SuppressFinalize(this);
     }
 
     private IConfigurationRoot SetupConfigurationRoot()

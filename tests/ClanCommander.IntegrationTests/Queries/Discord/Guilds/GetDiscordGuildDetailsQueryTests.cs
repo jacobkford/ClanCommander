@@ -2,9 +2,6 @@
 
 public class GetDiscordGuildDetailsQueryTests : TestBase
 {
-    public GetDiscordGuildDetailsQueryTests() 
-        : base() { }
-
     [Fact]
     public async void ShouldReturnGuildWithMessageCommandsPrefix()
     {

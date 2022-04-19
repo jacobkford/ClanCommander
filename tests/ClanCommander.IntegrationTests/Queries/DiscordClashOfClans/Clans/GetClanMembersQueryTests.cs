@@ -1,6 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanRoster;
-
-namespace ClanCommander.IntegrationTests.Queries.DiscordClashOfClans.Clans;
+﻿namespace ClanCommander.IntegrationTests.Queries.DiscordClashOfClans.Clans;
 
 public class GetClanMembersQueryTests : TestBase
 {

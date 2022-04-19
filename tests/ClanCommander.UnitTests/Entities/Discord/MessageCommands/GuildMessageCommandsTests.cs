@@ -1,4 +1,5 @@
 ﻿namespace ClanCommander.UnitTests.Entities.Discord.MessageCommands;
+
 public class GuildMessageCommandsTests
 {
     private readonly DiscordGuildId _stubDiscordGuildId = DiscordGuildId.FromUInt64(760910445686161488u);

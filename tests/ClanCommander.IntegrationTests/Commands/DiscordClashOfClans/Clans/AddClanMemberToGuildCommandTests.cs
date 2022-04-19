@@ -1,6 +1,4 @@
-﻿using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanMemberToGuild;
-
-namespace ClanCommander.IntegrationTests.Commands.DiscordClashOfClans.Clans;
+﻿namespace ClanCommander.IntegrationTests.Commands.DiscordClashOfClans.Clans;
 
 public class AddClanMemberToGuildCommandTests : TestBase
 {
