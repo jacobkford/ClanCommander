@@ -15,6 +15,10 @@ public class ValidDiscordClanMock
     public ValidDiscordClanMock()
     {
         _clanEntity = new GuildClan(ClanId, ClanName, GuildId);
+    }
+
+    internal void WithValidClanMember()
+    {
         _clanEntity.AddClanMember(LeaderId, LeaderUserId, LeaderRole);
     }
 

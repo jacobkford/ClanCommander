@@ -18,6 +18,7 @@ public class GetClanMembersQueryTests : TestBase
         await accountMock.SeedToDatabaseAsync(ServiceProvider);
 
         var clanMock = new ValidDiscordClanMock();
+        clanMock.WithValidClanMember();
         await clanMock.SeedToDatabaseAsync(ServiceProvider);
 
         // Act
