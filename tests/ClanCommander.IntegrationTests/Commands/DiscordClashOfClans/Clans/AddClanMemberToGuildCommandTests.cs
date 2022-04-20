@@ -42,6 +42,8 @@ public class AddClanMemberToGuildCommandTests : TestBase
         var accountMock = new ValidClashOfClansAccountMock();
         await accountMock.SeedToDatabaseAsync(ServiceProvider);
 
+        // Act
+        // Assert
         await Invoking(async () => 
             await Mediator.Send(new AddClanMemberToGuildCommand(
                 guildMock.GuildId.Value, invalidClanId, accountMock.AccountId.Value, accountMock.UserId.Value)))
@@ -66,6 +68,8 @@ public class AddClanMemberToGuildCommandTests : TestBase
         var clanMock = new ValidDiscordClanMock();
         await clanMock.SeedToDatabaseAsync(ServiceProvider);
 
+        // Act
+        // Assert
         await Invoking(async () =>
             await Mediator.Send(new AddClanMemberToGuildCommand(
                 guildMock.GuildId.Value, clanMock.ClanId.Value, invalidMemberId, accountMock.UserId.Value)))
@@ -87,6 +91,8 @@ public class AddClanMemberToGuildCommandTests : TestBase
 
         var clanMock = new ValidDiscordClanMock();
 
+        // Act
+        // Assert
         await Invoking(async () =>
             await Mediator.Send(new AddClanMemberToGuildCommand(
                 guildMock.GuildId.Value, clanMock.ClanId.Value, accountMock.AccountId.Value, accountMock.UserId.Value)))

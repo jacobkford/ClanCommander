@@ -27,28 +27,27 @@ public class JoinedDiscordGuildClientEvent : INotification
 
         public async Task Handle(JoinedDiscordGuildClientEvent notification, CancellationToken cancellationToken)
         {
+            var guildId = DiscordGuildId.FromUInt64(notification.GuildId);
+            var ownerId = DiscordUserId.FromUInt64(notification.GuildOwner);
+
             await using var scope = _serviceProvider.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
                 ?? throw new NullReferenceException();
 
-            var guildAlreadyExists = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(notification.GuildId));
+            var guildAlreadyExists = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == guildId);
 
             if (guildAlreadyExists is not null)
             {
                 guildAlreadyExists.UpdateGuildName(notification.GuildName);
-                guildAlreadyExists.ChangeOwner(DiscordUserId.FromUInt64(notification.GuildOwner));
-
-                await dbContext.SaveChangesAsync();
+                guildAlreadyExists.ChangeOwner(ownerId);
+                await dbContext.SaveChangesAsync(cancellationToken);
                 return;
             }
 
-            var guild = new RegisteredDiscordGuild(
-                    DiscordGuildId.FromUInt64(notification.GuildId), 
-                    notification.GuildName, 
-                    DiscordUserId.FromUInt64(notification.GuildOwner));
+            var guild = new RegisteredDiscordGuild(guildId, notification.GuildName, ownerId);
 
-            await dbContext.AddAsync(guild);
-            await dbContext.SaveChangesAsync();
+            await dbContext.AddAsync(guild, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

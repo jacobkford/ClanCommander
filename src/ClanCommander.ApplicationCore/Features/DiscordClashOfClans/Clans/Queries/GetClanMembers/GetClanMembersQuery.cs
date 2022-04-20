@@ -64,7 +64,14 @@ public class GetClanMembersQuery : IRequest<GetClanMembersDto>
                             Name = accountData.Name,
                             ExpLevel = accountData.ExpLevel,
                             UserId = member.UserId.Value,
-                            ClanRole = member.ClanRole.Name
+                            ClanRole = accountData.Role switch
+                            {
+                                ClashOfClans.Models.Role.Leader => ClanMemberRole.Leader.Name,
+                                ClashOfClans.Models.Role.CoLeader => ClanMemberRole.CoLeader.Name,
+                                ClashOfClans.Models.Role.Admin => ClanMemberRole.Elder.Name,
+                                ClashOfClans.Models.Role.Member => ClanMemberRole.Member.Name,
+                                _ => "Not Found",
+                            },
                         });
 
                         clanRosterData?.Remove(accountData);

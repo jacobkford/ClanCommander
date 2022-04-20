@@ -65,24 +65,10 @@ internal class ApplicationDbContextSeeder
             if (!_context.GuildClans.Any())
             {
                 var clan = new GuildClan(ClanId.FromString("#9UGQ0GL"), "PlaneClashers", DiscordGuildId.FromUInt64(760910445686161488));
-                clan.AddClanMember(PlayerId.FromString("#PQU9QLP2V"), DiscordUserId.FromUInt64(339924145909399562), ClanMemberRole.Leader);
+                clan.AddClanMember(PlayerId.FromString("#PQU9QLP2V"), DiscordUserId.FromUInt64(339924145909399562));
 
                 await _context.GuildClans.AddAsync(clan);
                 _logger.LogInformation("Seeded Clans and Members");
-            }
-
-            if (!_context.GuildClanMemberRoles.Any())
-            {
-                var roles = new List<GuildClanMemberRole>()
-                {
-                    new GuildClanMemberRole(DiscordGuildId.FromUInt64(760910445686161488), 761628609248624690, ClanMemberRole.Leader),
-                    new GuildClanMemberRole(DiscordGuildId.FromUInt64(760910445686161488), 761628584921006112, ClanMemberRole.CoLeader),
-                    new GuildClanMemberRole(DiscordGuildId.FromUInt64(760910445686161488), 761628566001287221, ClanMemberRole.Elder),
-                    new GuildClanMemberRole(DiscordGuildId.FromUInt64(760910445686161488), 761628550280904745, ClanMemberRole.Member),
-                };
-
-                await _context.GuildClanMemberRoles.AddRangeAsync(roles);
-                _logger.LogInformation("Seeded Guild Clan Roles");
             }
 
             await _context.SaveChangesAsync();

@@ -3,15 +3,15 @@
 public class AddClanMemberToGuildCommand : IRequest<AddClanMemberToGuildDto>
 {
     public ulong GuildId { get; private set; }
-    public string ClanId { get; private set; } = default!;
-    public string MemberId { get; private set; } = default!;
+    public string ClanId { get; private set; }
+    public string MemberId { get; private set; }
     public ulong UserId { get; private set; }
 
     public AddClanMemberToGuildCommand(ulong guildId, string clanId, string memberId, ulong userId)
     {
         GuildId = guildId;
-        ClanId = clanId;
-        MemberId = memberId;
+        ClanId = clanId.ToUpper();
+        MemberId = memberId.ToUpper();
         UserId = userId;
     }
 
@@ -54,7 +54,7 @@ public class AddClanMemberToGuildCommand : IRequest<AddClanMemberToGuildDto>
                 _ => throw new InvalidOperationException("Couldn't establish the member's role in the clan.")
             };
 
-            clan.AddClanMember(PlayerId.FromString(request.MemberId), DiscordUserId.FromUInt64(request.UserId), memberRole);
+            clan.AddClanMember(PlayerId.FromString(request.MemberId), DiscordUserId.FromUInt64(request.UserId));
             await dbContext.SaveChangesAsync(cancellationToken);
 
             return new AddClanMemberToGuildDto { Id = request.MemberId };

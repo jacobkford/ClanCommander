@@ -41,7 +41,7 @@ internal class GuildClan : Entity, IAggregateRoot
         DiscordRoleId = default;
     }
 
-    public void AddClanMember(PlayerId memberId, DiscordUserId userId, ClanMemberRole role)
+    public void AddClanMember(PlayerId memberId, DiscordUserId userId)
     {
         Guard.Against.InvalidClashOfClansTag(memberId.Value, nameof(memberId));
         Guard.Against.InvalidDiscordSnowflakeId(userId.Value, nameof(userId));
@@ -51,7 +51,7 @@ internal class GuildClan : Entity, IAggregateRoot
         if (memberAlreadyExists)
             throw new ArgumentException($"{memberId} has already been added");
 
-        var member = new GuildClanMember(memberId, userId, role);
+        var member = new GuildClanMember(memberId, userId);
         _members.Add(member);
     }
 

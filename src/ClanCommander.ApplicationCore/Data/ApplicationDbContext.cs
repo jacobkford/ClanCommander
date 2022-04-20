@@ -13,7 +13,6 @@ internal class ApplicationDbContext : DbContext
     public const string DISCORDCLASHOFCLANS_SCHEMA = "discord_coc";
     public DbSet<GuildClan> GuildClans { get; set; }
     public DbSet<GuildClanMember> GuildClanMembers { get; set; }
-    public DbSet<GuildClanMemberRole> GuildClanMemberRoles { get; set; }
     public DbSet<ClashOfClansAccount> ClashOfClansUserAccounts { get; set; }
     #endregion
 

@@ -48,9 +48,6 @@ internal class GuildClanEntityTypeConfiguration : IEntityTypeConfiguration<Guild
             clanMember.Property(cm => cm.UserId)
                 .HasConversion(new DiscordUserIdValueConverter());
 
-            clanMember.Property(cm => cm.ClanRole)
-                .HasConversion(new ClanMemberRoleValueConverter());
-
             clanMember.HasOne<DiscordUser>()
                 .WithMany()
                 .HasForeignKey(cm => cm.UserId)

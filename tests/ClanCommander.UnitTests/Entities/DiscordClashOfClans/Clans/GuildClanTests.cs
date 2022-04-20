@@ -66,7 +66,7 @@ public class GuildClanTests
     {
         // Arrange
         // Act
-        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId, ClanMemberRole.Member);
+        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId);
 
         // Assert
         _stubClan.Members.Should().NotBeEmpty()
@@ -78,11 +78,11 @@ public class GuildClanTests
     public void AddClanMember_ShouldThrowException_WhenAddingDuplicateMember()
     {
         // Arrange
-        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId, ClanMemberRole.Member);
+        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId);
 
         // Act
         // Assert
-        Invoking(() => _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId, ClanMemberRole.Member))
+        Invoking(() => _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId))
             .Should().Throw<SystemException>();
     }
 
@@ -90,7 +90,7 @@ public class GuildClanTests
     public void RemoveClanMember_ShouldRemoveFromList_WhenAllParametersAreValid()
     {
         // Arrange
-        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId, ClanMemberRole.Member);
+        _stubClan.AddClanMember(_stubPlayerId, _stubDiscordUserId);
 
         // Act
         _stubClan.RemoveClanMember(_stubPlayerId);

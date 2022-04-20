@@ -32,7 +32,7 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
             }
 
             var clanRosterData = clanData?.MemberList;
-            var clanLeader = clanRosterData?.SingleOrDefault(x => x.Role == ClashOfClans.Models.Role.Leader)?.Name;
+            var clanLeader = clanRosterData?.SingleOrDefault(x => x.Role == ClashOfClans.Models.Role.Leader);
             var clanBadgeUrl = clanData?.BadgeUrls.Large?.ToString() ?? "";
 
             var sqlQuery = $@"SELECT 
@@ -43,7 +43,7 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
                                 (
                                     SELECT ""{nameof(GuildClanMember.UserId)}"" 
                                     FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
-                                    WHERE ""{nameof(GuildClanMember.ClanRole)}"" = {ClanMemberRole.Leader.Value} 
+                                    WHERE ""{nameof(GuildClanMember.MemberId)}"" = @ClanLeader 
                                         AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
                                 ) AS ""{nameof(GetClanDetailsDto.LeaderDiscordUserId)}"",
                                 (
@@ -55,7 +55,7 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
                                 WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId 
                                     AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
 
-            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId });
+            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId, @ClanLeader = clanLeader.Tag });
             if (data is null)
             {
                 return new GetClanDetailsDto 
@@ -64,14 +64,14 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
                     Name = clanData.Name,
                     MemberCount = clanRosterData.Count,
                     ClanBadgeUrl = clanBadgeUrl,
-                    LeaderName = clanLeader,
+                    LeaderName = clanLeader.Name,
                 };
             }
 
             data.Registered = true;
             data.MemberCount = clanRosterData.Count;
             data.ClanBadgeUrl = clanBadgeUrl;
-            data.LeaderName = clanLeader;
+            data.LeaderName = clanLeader.Name;
             return data;
         }
     }
