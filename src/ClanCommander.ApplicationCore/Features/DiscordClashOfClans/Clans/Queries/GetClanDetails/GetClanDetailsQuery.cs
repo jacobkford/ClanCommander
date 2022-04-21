@@ -31,9 +31,15 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
                 throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
             }
 
-            var clanRosterData = clanData?.MemberList;
-            var clanLeader = clanRosterData?.SingleOrDefault(x => x.Role == ClashOfClans.Models.Role.Leader);
-            var clanBadgeUrl = clanData?.BadgeUrls.Large?.ToString() ?? "";
+            var clanName = clanData!.Name;
+            var clanRosterData = clanData.MemberList ?? throw new ArgumentNullException($"{clanName}'s roster couldn't be retrieved");
+            var clanRosterCount = clanRosterData.Count;
+            var clanBadgeUrl = clanData.BadgeUrls.Large?.ToString() ?? "";
+
+            var clanLeader = clanRosterData!.SingleOrDefault(x => x.Role == ClashOfClans.Models.Role.Leader)
+                ?? throw new ArgumentNullException($"{clanName}'s clan Leader couldn't be found");
+            var clanLeaderId = clanLeader.Tag;
+            var clanLeaderName = clanLeader.Name;
 
             var sqlQuery = $@"SELECT 
                                 ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" AS ""{nameof(GetClanDetailsDto.Id)}"",
@@ -55,23 +61,23 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
                                 WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId 
                                     AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
 
-            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId, @ClanLeader = clanLeader.Tag });
+            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId, @ClanLeader = clanLeader!.Tag });
             if (data is null)
             {
                 return new GetClanDetailsDto 
                 { 
                     Id = request.ClanId,
-                    Name = clanData.Name,
-                    MemberCount = clanRosterData.Count,
+                    Name = clanName,
+                    MemberCount = clanRosterCount,
                     ClanBadgeUrl = clanBadgeUrl,
-                    LeaderName = clanLeader.Name,
+                    LeaderName = clanLeaderName,
                 };
             }
 
             data.Registered = true;
-            data.MemberCount = clanRosterData.Count;
+            data.MemberCount = clanRosterCount;
             data.ClanBadgeUrl = clanBadgeUrl;
-            data.LeaderName = clanLeader.Name;
+            data.LeaderName = clanLeaderName;
             return data;
         }
     }

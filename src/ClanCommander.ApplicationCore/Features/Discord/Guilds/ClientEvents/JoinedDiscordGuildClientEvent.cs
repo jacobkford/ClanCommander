@@ -34,7 +34,7 @@ public class JoinedDiscordGuildClientEvent : INotification
             var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
                 ?? throw new NullReferenceException();
 
-            var guildAlreadyExists = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == guildId);
+            var guildAlreadyExists = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == guildId, cancellationToken);
 
             if (guildAlreadyExists is not null)
             {

@@ -26,14 +26,12 @@ public class UserJoinedGuildClientEvent : INotification
 
         public async Task Handle(UserJoinedGuildClientEvent notification, CancellationToken cancellationToken)
         {
-            var userExists = await _db.QueryFirstOrDefaultAsync<ulong>(
-                $@"SELECT ""{nameof(DiscordUser)}"".""{nameof(DiscordUser.UserId)}"" 
-                FROM ""{ApplicationDbContext.DISCORD_SCHEMA}"".""{nameof(DiscordUser)}"" 
-                WHERE ""{nameof(DiscordUser)}"".""{nameof(DiscordUser.UserId)}"" = @UserId;",
-                new
-                {
-                    @UserId = (decimal)notification.UserId,
-                }) is not (ulong)default;
+            var sqlQuery = $@"SELECT ""{nameof(DiscordUser)}"".""{nameof(DiscordUser.UserId)}"" 
+                            FROM ""{ApplicationDbContext.DISCORD_SCHEMA}"".""{nameof(DiscordUser)}"" 
+                            WHERE ""{nameof(DiscordUser)}"".""{nameof(DiscordUser.UserId)}"" = @UserId;";
+
+            var userExists = await _db.QueryFirstOrDefaultAsync<ulong>(sqlQuery, new { @UserId = (decimal)notification.UserId }) 
+                is not (ulong)default;
 
             if (userExists) return;
 
