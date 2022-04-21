@@ -22,3 +22,11 @@ internal class DiscordUser : Entity, IAggregateRoot
         AddDomainEvent(new UserCreatedEvent());
     }
 }
+
+internal static class DiscordUserExtensions
+{
+    public static ClashOfClansAccount CreateClashOfClansAccount(this DiscordUser instance, PlayerId accountId, string accountName)
+    {
+        return new ClashOfClansAccount(accountId, instance.UserId, accountName);
+    }
+}

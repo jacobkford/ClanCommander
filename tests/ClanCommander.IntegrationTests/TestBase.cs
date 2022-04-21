@@ -39,6 +39,7 @@ public abstract class TestBase : IDisposable
                 services.AddTransient<IMessageCommandService, MessageCommandService>();
                 services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanServiceMock>();
                 services.AddTransient<IClashOfClansApiPlayerService, ClashOfClansApiPlayerServiceMock>();
+                services.AddTransient<IDiscordUserService, DiscordUserServiceMock>();
             }).Build();
 
         ServiceProvider = host.Services;
