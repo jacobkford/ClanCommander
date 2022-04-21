@@ -89,7 +89,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         {
             var bot = Context.Client.CurrentUser;
 
-            var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
+            var response = await _mediator.Send(new ChangeDiscordGuildMessageCommandsPrefixCommand(Context.Guild.Id, newPrefix));
 
             var embed = new SuccessEmbedBuilder();
             embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());
@@ -105,7 +105,7 @@ public class GuildModule : ModuleBase<SocketCommandContext>
         {
             var bot = Context.Client.CurrentUser;
 
-            var response = await _mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(guildId, newPrefix));
+            var response = await _mediator.Send(new ChangeDiscordGuildMessageCommandsPrefixCommand(guildId, newPrefix));
 
             var embed = new SuccessEmbedBuilder();
             embed.WithAuthor($"{bot.Username} - Guild", bot.GetAvatarUrl() ?? bot.GetDefaultAvatarUrl());

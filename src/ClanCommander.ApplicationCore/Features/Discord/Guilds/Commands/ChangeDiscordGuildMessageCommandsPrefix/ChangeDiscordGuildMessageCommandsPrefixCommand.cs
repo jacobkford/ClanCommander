@@ -1,17 +1,17 @@
-﻿namespace ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeGuildMessageCommandsPrefix;
+﻿namespace ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeDiscordGuildMessageCommandsPrefix;
 
-public class ChangeGuildMessageCommandsPrefixCommand : IRequest<ChangeGuildMessageCommandsPrefixDto>
+public class ChangeDiscordGuildMessageCommandsPrefixCommand : IRequest<ChangeDiscordGuildMessageCommandsPrefixDto>
 {
     public ulong GuildId { get; set; }
     public string Prefix { get; set; }
 
-    public ChangeGuildMessageCommandsPrefixCommand(ulong guildId, string prefix)
+    public ChangeDiscordGuildMessageCommandsPrefixCommand(ulong guildId, string prefix)
     {
         GuildId = guildId;
         Prefix = prefix;
     }
 
-    internal class ChangeGuildMessageCommandsPrefixCommandHandler : IRequestHandler<ChangeGuildMessageCommandsPrefixCommand, ChangeGuildMessageCommandsPrefixDto>
+    internal class ChangeGuildMessageCommandsPrefixCommandHandler : IRequestHandler<ChangeDiscordGuildMessageCommandsPrefixCommand, ChangeDiscordGuildMessageCommandsPrefixDto>
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ICacheService _cacheService;
@@ -22,7 +22,7 @@ public class ChangeGuildMessageCommandsPrefixCommand : IRequest<ChangeGuildMessa
             _cacheService = cacheService;
         }
 
-        public async Task<ChangeGuildMessageCommandsPrefixDto> Handle(ChangeGuildMessageCommandsPrefixCommand request, CancellationToken cancellationToken)
+        public async Task<ChangeDiscordGuildMessageCommandsPrefixDto> Handle(ChangeDiscordGuildMessageCommandsPrefixCommand request, CancellationToken cancellationToken)
         {
             await using var scope = _serviceProvider.CreateAsyncScope();
             var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
@@ -40,7 +40,7 @@ public class ChangeGuildMessageCommandsPrefixCommand : IRequest<ChangeGuildMessa
 
             await _cacheService.SetAsync($"discord:guild:{request.GuildId}:prefix", request.Prefix, TimeSpan.FromDays(30), TimeSpan.FromDays(2));
 
-            return new ChangeGuildMessageCommandsPrefixDto
+            return new ChangeDiscordGuildMessageCommandsPrefixDto
             {
                 GuildId = request.GuildId,
                 OldPrefix = oldPrefix,

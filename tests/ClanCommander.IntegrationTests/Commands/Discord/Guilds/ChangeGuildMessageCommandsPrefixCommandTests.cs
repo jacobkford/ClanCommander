@@ -12,7 +12,7 @@ public class ChangeGuildMessageCommandsPrefixCommandTests : TestBase
         var newPrefix = "$";
 
         // Act
-        var result = await Mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(mock.GuildId.Value, newPrefix));
+        var result = await Mediator.Send(new ChangeDiscordGuildMessageCommandsPrefixCommand(mock.GuildId.Value, newPrefix));
 
         // Assert
         result.Should().NotBeNull();
@@ -31,7 +31,7 @@ public class ChangeGuildMessageCommandsPrefixCommandTests : TestBase
         var newPrefix = "£";
 
         // Act
-        var result = await Mediator.Send(new ChangeGuildMessageCommandsPrefixCommand(mock.GuildId.Value, newPrefix));
+        var result = await Mediator.Send(new ChangeDiscordGuildMessageCommandsPrefixCommand(mock.GuildId.Value, newPrefix));
 
         // Assert
         result.Should().NotBeNull();

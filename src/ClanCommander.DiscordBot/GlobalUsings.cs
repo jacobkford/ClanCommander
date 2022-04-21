@@ -1,5 +1,5 @@
 ﻿global using ClanCommander.ApplicationCore;
-global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeGuildMessageCommandsPrefix;
+global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeDiscordGuildMessageCommandsPrefix;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGuildDetails;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanDetails;
 global using ClanCommander.ApplicationCore.Interfaces;
