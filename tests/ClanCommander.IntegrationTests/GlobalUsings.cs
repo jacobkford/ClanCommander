@@ -8,6 +8,7 @@ global using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Users;
 global using ClanCommander.ApplicationCore.Entities.MessageCommands;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.ClientEvents;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeDiscordGuildMessageCommandsPrefix;
+global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.RegisterDiscordGuild;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGuildDetails;
 global using ClanCommander.ApplicationCore.Features.Discord.Users.ClientEvents;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanToGuild;
