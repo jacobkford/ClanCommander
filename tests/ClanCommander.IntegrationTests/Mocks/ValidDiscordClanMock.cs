@@ -19,7 +19,7 @@ public class ValidDiscordClanMock
 
     internal void WithValidClanMember()
     {
-        _clanEntity.AddClanMember(LeaderId, LeaderUserId, LeaderRole);
+        _clanEntity.AddClanMember(LeaderId, LeaderUserId);
     }
 
     internal async Task SeedToDatabaseAsync(IServiceProvider serviceProvider)
