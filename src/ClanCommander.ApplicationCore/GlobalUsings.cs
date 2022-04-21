@@ -39,6 +39,8 @@ global using System.Collections.Generic;
 global using System.Data;
 global using System.Linq;
 global using System.Linq.Expressions;
+global using System.Net.Http.Headers;
+global using System.Net.Http.Json;
 global using System.Reflection;
 global using System.Text.Json;
 global using System.Text.RegularExpressions;

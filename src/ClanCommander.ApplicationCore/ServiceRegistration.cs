@@ -21,6 +21,19 @@ public static class ServiceRegistration
         SqlMapper.AddTypeHandler(new PlayerIdTypeHandler());
         SqlMapper.AddTypeHandler(new ClanMemberRoleTypeHandler());
 
+        services.AddHttpClient("DiscordAPI", client =>
+        {
+            client.BaseAddress = new Uri("https://discordapp.com/api/");
+
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
+            client.DefaultRequestHeaders.UserAgent.Clear();
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("ClanCommanderBot", "1.0.0"));
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", configuration["Discord:BotToken"]);
+        });
+
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddTransient<ApplicationDbContextSeeder>();
         services.AddTransient<ICacheService, RedisCacheService>();
