@@ -11,14 +11,15 @@ global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.Chan
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.RegisterDiscordGuild;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGuildDetails;
 global using ClanCommander.ApplicationCore.Features.Discord.Users.ClientEvents;
-global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanToGuild;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanMemberToGuild;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanToGuild;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.RemoveGuildClan;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.RemoveGuildClanMember;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanDetails;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanRoster;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanRosterComposition;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Commands.LinkClashOfClansAccountToDiscordUser;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Commands.UnlinkClashOfClansAccountFromDiscordUser;
 global using ClanCommander.ApplicationCore.Interfaces;
 global using ClanCommander.ApplicationCore.Services;
 global using ClanCommander.IntegrationTests.Mocks;
