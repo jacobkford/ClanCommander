@@ -20,6 +20,8 @@ global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Qu
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanRosterComposition;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Commands.LinkClashOfClansAccountToDiscordUser;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Commands.UnlinkClashOfClansAccountFromDiscordUser;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Queries.FindGuildUserByClashOfClansAccount;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Users.Queries.GetAllUserClashOfClansAccounts;
 global using ClanCommander.ApplicationCore.Interfaces;
 global using ClanCommander.ApplicationCore.Services;
 global using ClanCommander.IntegrationTests.Mocks;
