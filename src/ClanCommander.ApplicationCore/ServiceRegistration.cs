@@ -40,6 +40,7 @@ public static class ServiceRegistration
         services.AddTransient<IMessageCommandService, MessageCommandService>();
         services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanService>();
         services.AddTransient<IClashOfClansApiPlayerService, ClashOfClansApiPlayerService>();
+        services.AddTransient<IDiscordUserService, DiscordUserService>();
 
         return services;
     }
