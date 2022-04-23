@@ -2,10 +2,10 @@
 global using ClanCommander.ApplicationCore.Data.ValueConverters;
 global using ClanCommander.ApplicationCore.Entities.ClashOfClans;
 global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
+global using ClanCommander.ApplicationCore.Entities.Discord.MessageCommands;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users;
 global using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Clans;
 global using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Users;
-global using ClanCommander.ApplicationCore.Entities.MessageCommands;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.ClientEvents;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.ChangeDiscordGuildMessageCommandsPrefix;
 global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Commands.RegisterDiscordGuild;
@@ -13,6 +13,8 @@ global using ClanCommander.ApplicationCore.Features.Discord.Guilds.Queries.GetGu
 global using ClanCommander.ApplicationCore.Features.Discord.Users.ClientEvents;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanMemberToGuild;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.AddClanToGuild;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.ChangeClanIdentifierDiscordRole;
+global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.DisableClanIdentifierDiscordRole;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.RemoveGuildClan;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Commands.RemoveGuildClanMember;
 global using ClanCommander.ApplicationCore.Features.DiscordClashOfClans.Clans.Queries.GetClanDetails;
