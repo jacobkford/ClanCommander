@@ -23,21 +23,25 @@ internal class RegisteredDiscordGuild : Entity, IAggregateRoot
         Name = name;
         OwnerId = ownerId;
 
-        AddDomainEvent(new DiscordServerRegisteredEvent());
+        this.AddDomainEvent(new DiscordGuildRegisteredEvent(id, name));
     }
 
     public void UpdateGuildName(string name)
     {
         Guard.Against.NullOrWhiteSpace(name, nameof(name));
-
+        var oldName = Name;
         Name = name;
+
+        this.AddDomainEvent(new DiscordGuildNameChangedEvent(GuildId, oldName, name));
     }
 
     public void ChangeOwner(DiscordUserId newOwnerId)
     {
         Guard.Against.InvalidDiscordSnowflakeId(newOwnerId.Value, nameof(newOwnerId));
-
+        var oldOwnerId = OwnerId;
         OwnerId = newOwnerId;
+
+        this.AddDomainEvent(new DiscordGuildOwnerChangedEvent(GuildId, oldOwnerId, newOwnerId));
     }
 }
 
