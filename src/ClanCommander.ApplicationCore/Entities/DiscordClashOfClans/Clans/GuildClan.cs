@@ -27,18 +27,26 @@ internal class GuildClan : Entity, IAggregateRoot
         ClanId = clanId;
         Name = clanName;
         GuildId = guildId;
+
+        this.AddDomainEvent(new DiscordGuildClanAddedEvent(clanId, clanName, guildId));
     }
 
-    public void ChangeDiscordRole(ulong role)
+    public void ChangeDiscordRole(ulong newRoleId)
     {
-        Guard.Against.InvalidDiscordSnowflakeId(role, nameof(role));
+        Guard.Against.InvalidDiscordSnowflakeId(newRoleId, nameof(newRoleId));
 
-        DiscordRoleId = role;
+        var oldRoleId = DiscordRoleId;
+        DiscordRoleId = newRoleId;
+
+        this.AddDomainEvent(new DiscordGuildClanIdentifierRoleChangedEvent(ClanId, Name, GuildId, oldRoleId, newRoleId));
     }
 
     public void DisableDiscordRole()
     {
+        var oldRoleId = DiscordRoleId;
         DiscordRoleId = default;
+
+        this.AddDomainEvent(new DiscordGuildClanIdentifierRoleChangedEvent(ClanId, Name, GuildId, oldRoleId, default));
     }
 
     public void AddClanMember(PlayerId memberId, DiscordUserId userId)
@@ -53,6 +61,8 @@ internal class GuildClan : Entity, IAggregateRoot
 
         var member = new GuildClanMember(memberId, userId);
         _members.Add(member);
+
+        this.AddDomainEvent(new DiscordGuildClanMemberAddedEvent(ClanId, Name, GuildId, memberId, userId));
     }
 
     public void RemoveClanMember(PlayerId memberId)
@@ -61,7 +71,11 @@ internal class GuildClan : Entity, IAggregateRoot
 
         Guard.Against.Null(member, nameof(member), "Couldn't find registered clan member with the provided identity");
 
+        var userId = member.UserId;
+
         _members.Remove(member);
+
+        this.AddDomainEvent(new DiscordGuildClanMemberRemovedEvent(ClanId, Name, GuildId, memberId, userId));
     }
 }
 
