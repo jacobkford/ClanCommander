@@ -35,17 +35,15 @@ public class AddClanToGuildCommand : IRequest<AddClanToGuildDto>
             var clanData = await _clanApiService.GetClanAsync(request.ClanId)
                 ?? throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
 
-            var guild = await dbContext.DiscordGuilds.FirstOrDefaultAsync(x => x.GuildId == requestGuildId);
-            if (guild is null)
-            {
-                throw new ArgumentException($"There was an issue registering your discord server. Remove this bot from the server & invite it back.");
-            }
+            var guild = await dbContext.DiscordGuilds.FirstOrDefaultAsync(x => x.GuildId == requestGuildId, cancellationToken)
+                ?? throw new ArgumentException($"There was an issue registering your discord server. Remove this bot from the server & invite it back.");
+            
+            var clanAlreadyRegistered = await dbContext.GuildClans.AnyAsync(
+                guildClan => guildClan.ClanId == requestClanId && guildClan.GuildId == requestGuildId, cancellationToken);
 
-            var clanAlreadyRegistered = await dbContext.GuildClans.AnyAsync(guildClan => guildClan.ClanId == requestClanId && guildClan.GuildId == requestGuildId);
             if (clanAlreadyRegistered)
-            {
                 throw new ArgumentException($"{clanData.Name} has already been registered in this server.");
-            }
+            
 
             var clan = guild.CreateClashOfClansClan(requestClanId, clanData.Name);
             await dbContext.AddAsync(clan, cancellationToken);

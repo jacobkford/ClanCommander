@@ -19,7 +19,6 @@ public abstract class TestBase : IDisposable
                 services.AddLogging();
                 services.AddEntityFrameworkNpgsql();
                 services.AddMediatR(Assembly.Load("ClanCommander.ApplicationCore"));
-                services.BuildServiceProvider();
                 services.AddDbContext<ApplicationDbContext>(
                     options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL")));
 
@@ -40,6 +39,7 @@ public abstract class TestBase : IDisposable
                 services.AddTransient<IClashOfClansApiClanService, ClashOfClansApiClanServiceMock>();
                 services.AddTransient<IClashOfClansApiPlayerService, ClashOfClansApiPlayerServiceMock>();
                 services.AddTransient<IDiscordUserService, DiscordUserServiceMock>();
+                services.BuildServiceProvider();
             }).Build();
 
         ServiceProvider = host.Services;

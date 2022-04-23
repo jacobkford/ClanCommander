@@ -25,12 +25,9 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
         // TODO: SQL query & object mapping needs refactoring
         public async Task<GetClanDetailsDto> Handle(GetClanDetailsQuery request, CancellationToken cancellationToken)
         {
-            var clanData = await _clanApiService.GetClanAsync(request.ClanId);
-            if (clanData is null)
-            {
-                throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
-            }
-
+            var clanData = await _clanApiService.GetClanAsync(request.ClanId)
+                ?? throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
+            
             var clanName = clanData!.Name;
             var clanRosterData = clanData.MemberList ?? throw new ArgumentNullException($"{clanName}'s roster couldn't be retrieved");
             var clanRosterCount = clanRosterData.Count;
@@ -42,26 +39,27 @@ public class GetClanDetailsQuery : IRequest<GetClanDetailsDto>
             var clanLeaderName = clanLeader.Name;
 
             var sqlQuery = $@"SELECT 
-                                ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" AS ""{nameof(GetClanDetailsDto.Id)}"",
-                                ""{nameof(GuildClan.Name)}"" AS ""{nameof(GetClanDetailsDto.Name)}"",
-                                ""{nameof(GuildClan.GuildId)}"" AS ""{nameof(GetClanDetailsDto.DiscordGuildId)}"",
-                                ""{nameof(GuildClan.DiscordRoleId)}"" AS ""{nameof(GetClanDetailsDto.DiscordRoleId)}"",
-                                (
-                                    SELECT ""{nameof(GuildClanMember.UserId)}"" 
-                                    FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
-                                    WHERE ""{nameof(GuildClanMember.MemberId)}"" = @ClanLeader 
-                                        AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
-                                ) AS ""{nameof(GetClanDetailsDto.LeaderDiscordUserId)}"",
-                                (
-                                    SELECT Count(*) 
-                                    FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
-                                    WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
-                                ) AS ""{nameof(GetClanDetailsDto.RegisteredMemberCount)}"" 
-                                FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClan)}""  
-                                WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId 
-                                    AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
+                            ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" AS ""{nameof(GetClanDetailsDto.Id)}"",
+                            ""{nameof(GuildClan.Name)}"" AS ""{nameof(GetClanDetailsDto.Name)}"",
+                            ""{nameof(GuildClan.GuildId)}"" AS ""{nameof(GetClanDetailsDto.DiscordGuildId)}"",
+                            ""{nameof(GuildClan.DiscordRoleId)}"" AS ""{nameof(GetClanDetailsDto.DiscordRoleId)}"",
+                            (
+                                SELECT ""{nameof(GuildClanMember.UserId)}"" 
+                                FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
+                                WHERE ""{nameof(GuildClanMember.MemberId)}"" = @ClanLeader 
+                                    AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
+                            ) AS ""{nameof(GetClanDetailsDto.LeaderDiscordUserId)}"",
+                            (
+                                SELECT Count(*) 
+                                FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
+                                WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
+                            ) AS ""{nameof(GetClanDetailsDto.RegisteredMemberCount)}"" 
+                            FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClan)}""  
+                            WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId 
+                                AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
 
-            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId, @ClanLeader = clanLeader!.Tag });
+            var data = await _db.QuerySingleOrDefaultAsync<GetClanDetailsDto>(
+                sqlQuery, new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId, @ClanLeader = clanLeader!.Tag });
             if (data is null)
             {
                 return new GetClanDetailsDto 

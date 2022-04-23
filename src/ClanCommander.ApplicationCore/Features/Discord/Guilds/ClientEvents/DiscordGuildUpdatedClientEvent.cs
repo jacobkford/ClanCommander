@@ -43,7 +43,6 @@ public class DiscordGuildUpdatedClientEvent : INotification
                     DiscordUserId.FromUInt64(notification.BeforeOwnerId));
 
                 await dbContext.AddAsync(guild, cancellationToken);
-                await dbContext.SaveChangesAsync(cancellationToken);
             }
 
             if (!notification.BeforeName.Equals(notification.AfterName))
