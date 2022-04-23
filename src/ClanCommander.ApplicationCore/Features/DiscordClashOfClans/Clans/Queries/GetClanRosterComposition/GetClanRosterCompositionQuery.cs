@@ -24,15 +24,12 @@ public class GetClanRosterCompositionQuery : IRequest<GetClanRosterCompositionDt
 
         public async Task<GetClanRosterCompositionDto?> Handle(GetClanRosterCompositionQuery request, CancellationToken cancellationToken)
         {
-            var clanData = await _clanApiService.GetClanAsync(request.ClanId);
-            if (clanData is null)
-            {
-                throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
-            }
+            var clanData = await _clanApiService.GetClanAsync(request.ClanId)
+                ?? throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
 
             var rosterComp = new ConcurrentDictionary<int, int>();
 
-            foreach (var clanMember in clanData.MemberList)
+            foreach (var clanMember in clanData.MemberList!)
             {
                 var player = await _playerApiService.GetPlayerAsync(clanMember.Tag);
                 if (player is null) continue;

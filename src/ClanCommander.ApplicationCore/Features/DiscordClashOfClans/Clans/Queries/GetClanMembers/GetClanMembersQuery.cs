@@ -43,11 +43,11 @@ public class GetClanMembersQuery : IRequest<GetClanMembersDto>
             var roster = new List<ClanMemberDto>();
 
             var sqlQuery = $@"SELECT ""{nameof(GuildClan)}"".*, ""{nameof(GuildClanMember)}"".* 
-                                FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClan)}"" 
-                                INNER JOIN ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
-                                    ON ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
-                                WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId
-                                    AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
+                            FROM ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClan)}"" 
+                            INNER JOIN ""{ApplicationDbContext.DISCORDCLASHOFCLANS_SCHEMA}"".""{nameof(GuildClanMember)}"" 
+                                ON ""{nameof(GuildClan)}"".""{nameof(GuildClan.Id)}"" = ""{nameof(GuildClanMember)}"".""ClanId"" 
+                            WHERE ""{nameof(GuildClan)}"".""{nameof(GuildClan.ClanId)}"" = @ClanId
+                                AND ""{nameof(GuildClan)}"".""{nameof(GuildClan.GuildId)}"" = @GuildId;";
 
             await _db.QueryAsync<GuildClan, GuildClanMember, GuildClan>(sqlQuery, param: new { @ClanId = request.ClanId, @GuildId = (decimal)request.GuildId }, 
                 splitOn: $"{nameof(GuildClanMember.MemberId)}", map: (clan, member) =>
