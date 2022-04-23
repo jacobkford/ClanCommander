@@ -1,4 +1,4 @@
-﻿namespace ClanCommander.ApplicationCore.Entities.MessageCommands;
+﻿namespace ClanCommander.ApplicationCore.Entities.Discord.MessageCommands;
 
 internal class GuildMessageCommands : Entity, IAggregateRoot
 {
@@ -7,7 +7,6 @@ internal class GuildMessageCommands : Entity, IAggregateRoot
     public string MessageCommandPrefix { get; private set; }
 
     public const string DefaultMessageCommandPrefix = "!";
-
 
 #pragma warning disable CS8618
     // For EF Core
@@ -31,6 +30,9 @@ internal class GuildMessageCommands : Entity, IAggregateRoot
             throw new ArgumentOutOfRangeException(nameof(newPrefix), "Message command prefix's cannot be longer than 2 characters");
         }
 
+        var oldPrefix = MessageCommandPrefix;
         MessageCommandPrefix = newPrefix;
+
+        this.AddDomainEvent(new DiscordGuildMessageCommandPrefixChangedEvent(GuildId, oldPrefix, newPrefix));
     }
 }
