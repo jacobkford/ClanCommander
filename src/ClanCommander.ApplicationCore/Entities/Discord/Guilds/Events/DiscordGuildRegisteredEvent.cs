@@ -6,9 +6,12 @@ internal class DiscordGuildRegisteredEvent : DomainEvent
 
     public string GuildName { get; private set; }
 
-    public DiscordGuildRegisteredEvent(DiscordGuildId guildId, string guildName)
+    public DiscordUserId OwnerId { get; private set; }
+
+    public DiscordGuildRegisteredEvent(DiscordGuildId guildId, string guildName, DiscordUserId ownerId)
     {
         GuildId = guildId;
         GuildName = guildName;
+        OwnerId = ownerId;
     }
 }

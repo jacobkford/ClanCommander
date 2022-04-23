@@ -23,7 +23,7 @@ internal class RegisteredDiscordGuild : Entity, IAggregateRoot
         Name = name;
         OwnerId = ownerId;
 
-        this.AddDomainEvent(new DiscordGuildRegisteredEvent(id, name));
+        this.AddDomainEvent(new DiscordGuildRegisteredEvent(id, name, ownerId));
     }
 
     public void UpdateGuildName(string name)
