@@ -22,14 +22,13 @@ internal class ClashOfClansAccount : Entity, IAggregateRoot
         AccountId = accountId;
         UserId = userId;
         Name = accountName;
+
+        this.AddDomainEvent(new DiscordUserLinkedClashOfClansAccountEvent(accountId, userId, accountName));
     }
 
     public void UpdateName(string accountName)
     {
         Guard.Against.NullOrWhiteSpace(accountName, nameof(accountName));
-
         Name = accountName;
-
-        AddDomainEvent(new UserAccountNameUpdatedEvent());
     }
 }
