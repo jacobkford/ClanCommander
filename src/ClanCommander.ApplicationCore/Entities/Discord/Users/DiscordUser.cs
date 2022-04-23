@@ -19,7 +19,7 @@ internal class DiscordUser : Entity, IAggregateRoot
         UserId = id;
         Username = discordUsername;
 
-        AddDomainEvent(new UserCreatedEvent());
+        AddDomainEvent(new DiscordUserCreatedEvent(id, discordUsername));
     }
 }
 
