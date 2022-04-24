@@ -3,7 +3,7 @@ global using ClanCommander.ApplicationCore.Entities.Discord.Guilds;
 global using ClanCommander.ApplicationCore.Entities.Discord.Users;
 global using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Clans;
 global using ClanCommander.ApplicationCore.Entities.DiscordClashOfClans.Users;
-global using ClanCommander.ApplicationCore.Entities.MessageCommands;
+global using ClanCommander.ApplicationCore.Entities.Discord.MessageCommands;
 global using FluentAssertions;
 global using System;
 global using System.Collections.Generic;

@@ -19,11 +19,5 @@ internal class GuildMessageCommandsEntityTypeConfiguration : IEntityTypeConfigur
 
         builder.Property(gmc => gmc.MessageCommandPrefix)
             .IsRequired(true);
-
-        builder.HasOne<RegisteredDiscordGuild>()
-            .WithMany()
-            .HasForeignKey(gmc => gmc.GuildId)
-            .HasPrincipalKey(g => g.GuildId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

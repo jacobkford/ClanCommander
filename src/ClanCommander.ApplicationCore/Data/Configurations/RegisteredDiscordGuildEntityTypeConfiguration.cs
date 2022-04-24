@@ -16,11 +16,12 @@ internal class RegisteredDiscordGuildEntityTypeConfiguration : IEntityTypeConfig
         builder.HasAlternateKey(rdg => rdg.GuildId);
 
         builder.Property(rdg => rdg.GuildId)
-            .HasConversion(new DiscordGuildIdValueConverter());
+            .HasConversion(new DiscordGuildIdValueConverter())
+            .IsRequired(true);
 
         builder.Property(rdg => rdg.OwnerId)
             .HasConversion(new DiscordUserIdValueConverter())
-            .IsRequired();
+            .IsRequired(true);
 
         builder.Property(rdg => rdg.Name)
             .IsRequired(true);
