@@ -36,7 +36,7 @@ public class RemoveGuildClanMemberCommand : IRequest
                 ?? throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
 
             clan.RemoveClanMember(requestMemberId);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
         }

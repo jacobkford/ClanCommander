@@ -21,19 +21,10 @@ public class LeftDiscordGuildClientEvent : INotification
             _serviceProvider = serviceProvider;
         }
 
-        public async Task Handle(LeftDiscordGuildClientEvent notification, CancellationToken cancellationToken)
+        public Task Handle(LeftDiscordGuildClientEvent notification, CancellationToken cancellationToken)
         {
-            await using var scope = _serviceProvider.CreateAsyncScope();
-            var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()
-                ?? throw new NullReferenceException();
-
-            var guild = await dbContext.DiscordGuilds.SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(notification.GuildId));
-
-            if (guild is not null)
-            {
-                dbContext.Remove(guild);
-                await dbContext.SaveChangesAsync();
-            }
+            // TODO: Delete all Clash Of Clans related Guild data
+            return Task.CompletedTask;
         }
     }
 }

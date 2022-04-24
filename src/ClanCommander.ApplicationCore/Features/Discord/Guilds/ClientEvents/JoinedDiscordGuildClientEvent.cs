@@ -40,14 +40,14 @@ public class JoinedDiscordGuildClientEvent : INotification
             {
                 guildAlreadyExists.UpdateGuildName(notification.GuildName);
                 guildAlreadyExists.ChangeOwner(ownerId);
-                await dbContext.SaveChangesAsync(cancellationToken);
+                await dbContext.SaveEntitiesAsync(cancellationToken);
                 return;
             }
 
             var guild = new RegisteredDiscordGuild(guildId, notification.GuildName, ownerId);
 
             await dbContext.AddAsync(guild, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

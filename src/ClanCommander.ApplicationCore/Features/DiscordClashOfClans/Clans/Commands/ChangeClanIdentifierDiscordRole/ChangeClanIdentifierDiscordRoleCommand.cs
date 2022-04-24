@@ -38,7 +38,7 @@ public class ChangeClanIdentifierDiscordRoleCommand : IRequest
 
             clan.ChangeDiscordRole(request.RoleId);
 
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
             return Unit.Value;
         }
     }

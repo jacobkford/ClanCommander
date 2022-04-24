@@ -35,7 +35,7 @@ public class DisableClanIdentifierDiscordRoleCommand : IRequest
 
             clan.DisableDiscordRole();
 
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
             return Unit.Value;
         }
     }

@@ -41,11 +41,11 @@ public class DiscordGuildUpdatedClientEventTests : TestBase
     public async void ShouldCreateAndUpdateRegisteredGuild_WhenChangesAreMade_AndGuildHasNotBeenRegistered()
     {
         // Arrange
-        var guildId = 236523452230533121u;
-        var guildOldName = "Test3";
-        var guildOldOwner = 155149108183695360u;
-        var guildNewName = "Test4";
-        var newOwner = 339924145909399562u;
+        var guildId = 760910445686161488u;
+        var guildOldName = "TestUser#0001";
+        var guildOldOwner = 339924145909399562u;
+        var guildNewName = "TestUser#0004";
+        var newOwner = 155149108183695360u;
 
         // Act
         await Mediator.Publish(new DiscordGuildUpdatedClientEvent(

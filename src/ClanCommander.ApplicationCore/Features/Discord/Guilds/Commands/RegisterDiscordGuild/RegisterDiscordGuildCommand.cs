@@ -43,7 +43,7 @@ public class RegisterDiscordGuildCommand : IRequest<RegisterDiscordGuildDto>
             var guild = new RegisteredDiscordGuild(guildId, request.GuildName, ownerId);
 
             await dbContext.AddAsync(guild, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             return new RegisterDiscordGuildDto { GuildId = request.GuildId };
         }

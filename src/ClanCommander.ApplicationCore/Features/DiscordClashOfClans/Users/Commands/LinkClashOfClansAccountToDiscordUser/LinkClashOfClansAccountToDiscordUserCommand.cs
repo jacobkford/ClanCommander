@@ -58,7 +58,7 @@ public class LinkClashOfClansAccountToDiscordUserCommand : IRequest<LinkClashOfC
 
             var account = user.CreateClashOfClansAccount(requestAccountId, accountData.Name);
             await dbContext.AddAsync(account, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             return new LinkClashOfClansAccountToDiscordUserDto 
             { 

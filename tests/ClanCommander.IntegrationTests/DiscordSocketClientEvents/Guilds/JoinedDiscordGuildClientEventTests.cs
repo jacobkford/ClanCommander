@@ -9,12 +9,10 @@ public class JoinedDiscordGuildClientEventTests : TestBase
     public async void ShouldRegisterDiscordGuild_WhenBotJoinsGuild()
     {
         // Arrange
-        var guildId = 236523452230533121u;
-        var guildName = "Test3";
-        var guildOwner = 155149108183695360u;
+        var mock = new ValidRegisteredDiscordGuildMock();
 
         // Act
-        await Mediator.Publish(new JoinedDiscordGuildClientEvent(guildId, guildName, guildOwner));
+        await Mediator.Publish(new JoinedDiscordGuildClientEvent(mock.GuildId.Value, mock.GuildName, mock.GuildOwner.Value));
 
         // Assert
         await using var scope = ServiceProvider.CreateAsyncScope();
@@ -22,11 +20,11 @@ public class JoinedDiscordGuildClientEventTests : TestBase
 
         var result = await dbContext.DiscordGuilds
             .AsNoTracking()
-            .SingleAsync(x => x.GuildId == DiscordGuildId.FromUInt64(guildId));
+            .SingleAsync(x => x.GuildId == mock.GuildId);
 
         result.Should().NotBeNull();
-        result.GuildId.Value.Should().Be(guildId);
-        result.Name.Should().Be(guildName);
-        result.OwnerId.Value.Should().Be(guildOwner);
+        result.GuildId.Should().Be(mock.GuildId);
+        result.Name.Should().Be(mock.GuildName);
+        result.OwnerId.Value.Should().Be(mock.GuildOwner.Value);
     }
 }

@@ -47,7 +47,7 @@ public class AddClanToGuildCommand : IRequest<AddClanToGuildDto>
 
             var clan = guild.CreateClashOfClansClan(requestClanId, clanData.Name);
             await dbContext.AddAsync(clan, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             return new AddClanToGuildDto { GuildId = request.GuildId, ClanId = request.ClanId };
         }

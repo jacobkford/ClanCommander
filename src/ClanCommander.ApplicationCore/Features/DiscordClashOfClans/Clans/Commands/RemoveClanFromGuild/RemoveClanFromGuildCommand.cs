@@ -35,7 +35,7 @@ public class RemoveClanFromGuildCommand : IRequest
             if (clan is not null)
             {
                 dbContext.Remove(clan);
-                await dbContext.SaveChangesAsync(cancellationToken);
+                await dbContext.SaveEntitiesAsync(cancellationToken);
             }
 
             return Unit.Value;

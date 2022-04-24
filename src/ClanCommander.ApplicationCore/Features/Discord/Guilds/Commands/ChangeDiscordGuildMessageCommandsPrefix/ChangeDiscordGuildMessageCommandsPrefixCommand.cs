@@ -36,7 +36,7 @@ public class ChangeDiscordGuildMessageCommandsPrefixCommand : IRequest<ChangeDis
             var oldPrefix = guildMessageCommandsConfig.MessageCommandPrefix;
 
             guildMessageCommandsConfig.ChangeMessageCommandPrefix(request.Prefix);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             await _cacheService.SetAsync($"discord:guild:{request.GuildId}:prefix", request.Prefix, TimeSpan.FromDays(30), TimeSpan.FromDays(2));
 

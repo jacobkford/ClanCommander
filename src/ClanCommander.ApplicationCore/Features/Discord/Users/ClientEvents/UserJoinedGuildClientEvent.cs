@@ -41,7 +41,7 @@ public class UserJoinedGuildClientEvent : INotification
 
             var user = new DiscordUser(DiscordUserId.FromUInt64(notification.UserId), notification.Username);
             await dbContext.AddAsync(user, cancellationToken);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

@@ -55,7 +55,7 @@ public class DiscordGuildUpdatedClientEvent : INotification
                 guild.ChangeOwner(DiscordUserId.FromUInt64(notification.AfterOwnerId));
             }
 
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

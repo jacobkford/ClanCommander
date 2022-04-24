@@ -25,7 +25,7 @@ internal class DiscordGuildRegisteredEventHandler : INotificationHandler<Discord
         await dbContext.AddAsync(ownerEntity, cancellationToken);
 
         // TODO: Send to log discord channel 
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveEntitiesAsync(cancellationToken);
         return;
     }
 }

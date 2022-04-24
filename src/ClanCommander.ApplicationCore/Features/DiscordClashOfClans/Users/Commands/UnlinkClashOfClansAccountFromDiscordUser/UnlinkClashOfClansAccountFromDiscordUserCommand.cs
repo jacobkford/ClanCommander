@@ -35,7 +35,7 @@ public class UnlinkClashOfClansAccountFromDiscordUserCommand : IRequest
                 ?? throw new ArgumentException($"There's no account with the id of {request.AccountId} linked to this user");
 
             dbContext.Remove(account);
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
             return Unit.Value;
         }
     }

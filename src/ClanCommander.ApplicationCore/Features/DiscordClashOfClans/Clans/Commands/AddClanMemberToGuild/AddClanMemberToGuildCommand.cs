@@ -55,7 +55,7 @@ public class AddClanMemberToGuildCommand : IRequest<AddClanMemberToGuildDto>
             };
 
             clan.AddClanMember(PlayerId.FromString(request.MemberId), DiscordUserId.FromUInt64(request.UserId));
-            await dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveEntitiesAsync(cancellationToken);
 
             return new AddClanMemberToGuildDto { Id = request.MemberId };
         }
