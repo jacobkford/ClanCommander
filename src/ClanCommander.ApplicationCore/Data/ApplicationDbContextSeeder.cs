@@ -13,6 +13,8 @@ internal class ApplicationDbContextSeeder
 
     public async Task SeedAsync()
     {
+        await _context.Database.EnsureCreatedAsync();
+
         try
         {
             if (!_context.DiscordGuilds.Any())

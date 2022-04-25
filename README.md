@@ -61,24 +61,12 @@ Go into the ClanCommander project folder you've just downloaded, and open the [d
 ```yaml
 # clancommander.discordbot service
 environment:
-  - Discord:BotToken= # add bot token here
-  - Discord:BotOwnerId=	# add your discord user id
-  - Discord:DevGuildId= # add dev/test guild id
-  - ConnectionStrings:PostgreSQL= # add db connection string here
-  - ConnectionStrings:Redis= # add redis connection string here
-  - ClashOfClansAPI:Token= # add Clash Of Clans api token here
-
-# db service
-environment:
-  - POSTGRES_PASSWORD= # add db password here
-  - POSTGRES_USER= # add db user name here
-  - POSTGRES_DB= # add db name here
-ports:
-  - 5432:5432 # add postgresql port number here
-
-# redis-server service
-ports:
-  - 6379:6379 # add redis port number here
+  - Discord__BotToken= # add bot token here
+  - Discord__BotOwnerId= # add your discord user id
+  - Discord__DevGuildId= # add dev/test guild id
+  - ConnectionStrings__PostgreSQL= # add db connection string here
+  - ConnectionStrings__Redis= # add redis connection string here
+  - ClashOfClansAPI__Token= # add Clash Of Clans api token here
 ```
 
 After you've setup all the environment credentials, you will need to open your command line and do the following:
