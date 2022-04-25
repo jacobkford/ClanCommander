@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  clancommander.discordbot:
+    image: ${DOCKER_REGISTRY-}clancommanderdiscordbot
+    build:
+      context: .
+      dockerfile: src/ClanCommander.DiscordBot/Dockerfile
+    environment:
+      - Discord:BotToken=
+      - Discord:BotOwnerId=0
+      - Discord:DevGuildId=0
+      - ConnectionStrings:PostgreSQL=Host=127.0.0.1;Port=5432;Database=discord_guild;Username=postgres;Password=myPassword;
+      - ConnectionStrings:Redis=127.0.0.1:6379
+      - ClashOfClansAPI:Token=
+    depends_on:
+      - db
+      - redis-server
+  db:
+    image: postgres:12.10-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=myPassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=discord_guild
+    ports:
+      - 5432:5432
+  redis-server:
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always

@@ -6,6 +6,8 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/ClanCommander.DiscordBot/ClanCommander.DiscordBot.csproj", "src/ClanCommander.DiscordBot/"]
+COPY ["src/ClanCommander.ApplicationCore/ClanCommander.ApplicationCore.csproj", "src/ClanCommander.ApplicationCore/"]
+COPY ["src/ClanCommander.SharedKernel/ClanCommander.SharedKernel.csproj", "src/ClanCommander.SharedKernel/"]
 RUN dotnet restore "src/ClanCommander.DiscordBot/ClanCommander.DiscordBot.csproj"
 COPY . .
 WORKDIR "/src/src/ClanCommander.DiscordBot"
