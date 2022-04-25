@@ -7,10 +7,9 @@
 <h4 align="center">Discord bot to manage clans from the game Clash Of Clans.</h4>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#license">License</a>
+  <a href="#key-features">Key Features</a> â€¢
+  <a href="#upcoming-features">Upcoming Features</a> â€¢
+  <a href="#how-to-use">How To Use</a>
 </p>
 
 ## Key Features
@@ -23,7 +22,7 @@
 * Link Clash Of Clans account to User
 * Cross platform hosting with the .NET runtime
 
-## Future Features
+## Upcoming Features
 
 * Moderation commands/tools
 * User welcome system
