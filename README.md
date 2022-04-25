@@ -25,8 +25,11 @@
 
 ## Future Features
 
-* Welcome system
+* Moderation commands/tools
+* User welcome system
+* Discord channel event logging
 * Clash Of Clans account & clan verification
+  - Block other users/servers linking clans & accounts unless they have api key
 * Clan Entry/Recruitment System
   - Custom entry requirement strategies
   - Auto role & account linking management
@@ -44,6 +47,11 @@ To download this application, I recommend cloning it via [Git](https://git-scm.c
 $ git clone https://github.com/jacobkford/ClanCommander
 ```
 
+You will need two different API tokens to run this application, which are the following:
+
+* [Discord Bot Token](https://www.writebots.com/discord-bot-token/)
+* [Clash Of Clans API Token](https://developer.clashofclans.com/#/)
+
 There are two ways you can run this application, either using [Docker](https://www.docker.com) *(quicker)* or manually installing all the dependancies and running it via the .NET runtime.
 
 ### Docker
@@ -51,8 +59,7 @@ There are two ways you can run this application, either using [Docker](https://w
 Go into the ClanCommander project folder you've just downloaded, and open the [docker-compose.yml](https://github.com/jacobkford/ClanCommander/blob/master/docker-compose.yml) file, and update the environment credentials highlighed below:
 
 ```yaml
-
-# clancommander.discordbot service...
+# clancommander.discordbot service
 environment:
   - Discord:BotToken= # add bot token here
   - Discord:BotOwnerId=	# add your discord user id
@@ -61,12 +68,17 @@ environment:
   - ConnectionStrings:Redis= # add redis connection string here
   - ClashOfClansAPI:Token= # add Clash Of Clans api token here
 
-# db service...
+# db service
 environment:
   - POSTGRES_PASSWORD= # add db password here
   - POSTGRES_USER= # add db user name here
   - POSTGRES_DB= # add db name here
+ports:
+  - 5432:5432 # add postgresql port number here
 
+# redis-server service
+ports:
+  - 6379:6379 # add redis port number here
 ```
 
 After you've setup all the environment credentials, you will need to open your command line and do the following:
