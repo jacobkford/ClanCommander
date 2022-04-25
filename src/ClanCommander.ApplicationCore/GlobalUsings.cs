@@ -46,5 +46,3 @@ global using System.Reflection;
 global using System.Text.Json;
 global using System.Text.RegularExpressions;
 global using System.Threading.Tasks;
-global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Events;
-global using ClanCommander.ApplicationCore.Entities.GuildEntry.ClashOfClans.Interview.Events;

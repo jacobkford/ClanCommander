@@ -11,7 +11,7 @@ public class GetClanRosterCompositionQuery : IRequest<GetClanRosterCompositionDt
         ClanId = clanId.ToUpper();
     }
 
-    internal class GetClanRosterCompositionQueryHandler : IRequestHandler<GetClanRosterCompositionQuery, GetClanRosterCompositionDto?>
+    internal class GetClanRosterCompositionQueryHandler : IRequestHandler<GetClanRosterCompositionQuery, GetClanRosterCompositionDto>
     {
         private readonly IClashOfClansApiClanService _clanApiService;
         private readonly IClashOfClansApiPlayerService _playerApiService;
@@ -22,7 +22,7 @@ public class GetClanRosterCompositionQuery : IRequest<GetClanRosterCompositionDt
             _playerApiService = playerApiService;
         }
 
-        public async Task<GetClanRosterCompositionDto?> Handle(GetClanRosterCompositionQuery request, CancellationToken cancellationToken)
+        public async Task<GetClanRosterCompositionDto> Handle(GetClanRosterCompositionQuery request, CancellationToken cancellationToken)
         {
             var clanData = await _clanApiService.GetClanAsync(request.ClanId)
                 ?? throw new ArgumentException($"Clan with the Id of '{request.ClanId}' was not found.");
