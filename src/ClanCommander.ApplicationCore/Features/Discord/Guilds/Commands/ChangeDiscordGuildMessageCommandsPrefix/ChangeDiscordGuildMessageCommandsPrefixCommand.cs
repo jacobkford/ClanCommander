@@ -14,12 +14,10 @@ public class ChangeDiscordGuildMessageCommandsPrefixCommand : IRequest<ChangeDis
     internal class ChangeGuildMessageCommandsPrefixCommandHandler : IRequestHandler<ChangeDiscordGuildMessageCommandsPrefixCommand, ChangeDiscordGuildMessageCommandsPrefixDto>
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ICacheService _cacheService;
 
-        public ChangeGuildMessageCommandsPrefixCommandHandler(IServiceProvider serviceProvider, ICacheService cacheService)
+        public ChangeGuildMessageCommandsPrefixCommandHandler(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _cacheService = cacheService;
         }
 
         public async Task<ChangeDiscordGuildMessageCommandsPrefixDto> Handle(ChangeDiscordGuildMessageCommandsPrefixCommand request, CancellationToken cancellationToken)
@@ -32,13 +30,10 @@ public class ChangeDiscordGuildMessageCommandsPrefixCommand : IRequest<ChangeDis
                 .SingleOrDefaultAsync(x => x.GuildId == DiscordGuildId.FromUInt64(request.GuildId));
 
             guildMessageCommandsConfig ??= new GuildMessageCommands(DiscordGuildId.FromUInt64(request.GuildId));
-            
+         
             var oldPrefix = guildMessageCommandsConfig.MessageCommandPrefix;
-
             guildMessageCommandsConfig.ChangeMessageCommandPrefix(request.Prefix);
             await dbContext.SaveEntitiesAsync(cancellationToken);
-
-            await _cacheService.SetAsync($"discord:guild:{request.GuildId}:prefix", request.Prefix, TimeSpan.FromDays(30), TimeSpan.FromDays(2));
 
             return new ChangeDiscordGuildMessageCommandsPrefixDto
             {
